@@ -1,0 +1,1 @@
+"${SCHRODINGER}/glide" PR_Auto_Grid.in -OVERWRITE -HOST localhost -TMPLAUNCHDIR

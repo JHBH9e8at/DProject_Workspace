@@ -1,0 +1,1 @@
+"${SCHRODINGER}/glide" PPSgrid.in -OVERWRITE -HOST localhost -TMPLAUNCHDIR

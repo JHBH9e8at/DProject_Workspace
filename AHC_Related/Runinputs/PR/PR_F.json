@@ -1,0 +1,55 @@
+{
+    "task": "PR_run",
+    "output_dir": "/home/andy/proj/701/output",
+    "load_from_previous": false,
+    "logging": false,
+    "monitor_app": false,
+    "diversity_filter": {
+      "run": true,
+      "name": "ScaffoldSimilarityECFP",
+      "parameters": {
+        "nbmax": 50,
+        "minscore": 0.5,
+        "minsimilarity": 0.8,
+        "radius": 2,
+        "useFeatures": false,
+        "bits": 16384,
+        "outputmode": "linear"
+      }
+    },
+    "scoring_functions": [
+      {
+        "name": "MolecularDescriptors",
+        "run": true,
+        "parameters": {
+          "prefix": "desc",
+          "n_jobs": 1
+        }
+      },
+      {
+        "name": "GlideDock",
+        "run": true,
+        "parameters": {
+          "prefix": "PR",
+          "glide_template": "/home/andy/proj/701/input/Runfiles/PR_Runs/new/PRGlide.in",
+          "cluster": "tcp://138.37.52.153:8786",
+          "timeout": 600.0,
+          "ligand_preparation": "ligprep"
+        }
+      }
+    ],
+    "scoring": {
+      "method": "amean",
+      "metrics": [
+        {
+          "name": "PR_r_i_docking_score",
+          "weight": 1.0,
+          "modifier": "norm",
+          "parameters": {
+            "objective": "minimize"
+          }
+        }
+      ]
+    }
+  }
+  

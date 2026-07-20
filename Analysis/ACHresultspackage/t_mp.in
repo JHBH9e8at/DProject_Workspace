@@ -1,0 +1,10 @@
+analysismode=mp
+basedir=/home/andy/proj/701/output/2026_07_07_SMILES-RNN_PR_run/iterations
+odir=/home/andy/proj/701/code/developing_dir/tempdevtest/mp20260720
+jn=PR
+threshold=-6
+ref=OM
+umap=on
+tsne=off
+mode=select
+feat=fp

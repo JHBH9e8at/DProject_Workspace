@@ -1,0 +1,9 @@
+indir=/home/andy/proj/701/output/scrap2026_06_21_SMILES-RNN_PR_run
+odir=/home/andy/proj/701/code/developing_dir/tempdevtest/figs/testing2
+jn=PR
+threshold=-9.0
+ref=OM,MAV,AFI
+umap=on
+tsne=off
+mode=select
+feat=fp

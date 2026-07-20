@@ -1,0 +1,41 @@
+Glide version 101140 (mmshare version 64140)
+mmshare         7e2e09bde6
+glide-src       caa4c59e65
+psp-src         86ad505f80
+macromodel-src  a1e2893b06
+epik-src        dac97ffddd
+
+Copyright (c) Schrodinger, LLC.
+All Rights Reserved.
+
+--------------------------------------------------------------------------------
+JobId          : a507eb5a-5d00-11f1-ba92-42010a658011
+Name           : PPSgrid
+Program        : Glide
+Version        : 2023-4 build 140
+Host           : session-1.virtual-cluster.lan
+Dir            : /home/user320/PPSgrid
+HostEntry      : localhost
+JobHost        : session-1.virtual-cluster.lan
+JobDir         : /tmp/user320/jobs/a507eb5a-5d00-11f1-ba92-42010a658011
+JobSchrodinger : /opt/schrodinger/suite/suites/mounts/suite2023-4-build140
+Commandline    : /opt/schrodinger/suite/suites/mounts/suite2023-4-build140/glide PPSgrid.in -OVERWRITE -HOST localhost -PROJ /home/user320/701Projdir/701_redocking_.prj -DISP ignore -VIEWNAME glide_gridgen_gui.GridGenPanel -TMPLAUNCHDIR
+StartTime      : 2026-05-31-14:54:37
+--------------------------------------------------------------------------------
+
+Calling OPLS_2005 atomtyping ...
+Finished parameter assignment
+ VdW radii of protein atoms scaled by    1.00000000000000     
+ Charge cutoff for polarity  0.250000000000000     
+  Receptor setup: (nsites, nx, ny, nz, bsize)=(         125 ,           35 , 
+          35 ,           35 ,    1.00000000000000      ).
+ Screening setup finished.
+ DOCKMAIN: getting receptor.
+  DOCKMAIN after grid: (nx, ny, nz) = (          96 ,           96 , 
+          96 ).
+Creating output grid archive 'PPSgrid.zip'
+
+Exiting Glide
+Date: Sunday, May 31 2026, at 14:56:49 UTC
+CPU time (s): 127.5 user, 0.7 system, 129.1 real
+Total elapsed time = 129 seconds (2 minutes, 9 seconds)

@@ -1,0 +1,21 @@
+
+# first make screen
+
+screen -S [screen name]
+
+
+conda activate molscore
+dask-scheduler --port 8786 --dashboard-address :8787 &
+dask-worker tcp://138.37.52.153:8786 --nworkers 8 --nthreads 1 --local-directory /home/andy/proj/701/output/dask_cache &
+python /home/andy/Project/MolScore_related/SMILES-RNN-main/reinforcement_learning.py \
+-p /home/andy/Project/MolScore_related/SMILES-RNN-main/priors/ChEMBL28pur.ckpt \
+-m /home/andy/proj/701/input/Runfiles/PR_Runs/PR_base.json \
+--model RNN \
+AHC
+
+Ctrl-A, then D # to detach the screen
+# Additional Commands
+screen -r testJob # to reattach the screen
+screen -X -S testJob quit # to quit the screen
+ps -ef | grep -E "dask-(scheduler|worker)|dask scheduler|dask worker" | grep -v grep
+ss -ltnp # to list the ports currently in use
