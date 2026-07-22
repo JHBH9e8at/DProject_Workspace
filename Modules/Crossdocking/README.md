@@ -144,5 +144,13 @@ Combined tables retain the original `molecule_id` and add `ligand_state`,
 `L_PPS_to_R_PR__2_3-2`.
 
 
--- Testing log
-env: molscore
+
+# Testing status
+260722 : Single arm testing complete, log files
+
+
+# Future updates 
+
+Change Input format to bash .in file
+Change Ligprep log out dir
+
