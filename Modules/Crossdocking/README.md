@@ -142,3 +142,7 @@ double_arm_crossdock/
 Combined tables retain the original `molecule_id` and add `ligand_state`,
 `receptor_state`, `crossdock_arm`, and a collision-safe `crossdock_id` such as
 `L_PPS_to_R_PR__2_3-2`.
+
+
+-- Testing log
+env: molscore

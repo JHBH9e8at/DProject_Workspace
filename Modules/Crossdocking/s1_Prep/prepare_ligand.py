@@ -40,9 +40,15 @@ def prepare_ligand(ligand_file, output_sdf):
         input_flag,
         str(ligand_file),
         "-osd",
-        str(output_sdf),
+        output_sdf.name,
         "-WAIT",
     ]
+
+    subprocess.run(
+        command,
+        cwd=output_sdf.parent,
+        check=True,
+    )
 
     print("Running:", " ".join(command))
     subprocess.run(command, check=True)
