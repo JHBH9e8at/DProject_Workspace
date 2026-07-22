@@ -35,23 +35,37 @@ def prepare_ligand(ligand_file, output_sdf):
         raise FileNotFoundError(f"LigPrep module not detec: {ligprep}")
 
     output_sdf.parent.mkdir(parents=True, exist_ok=True)
-    command = [
-        str(ligprep),
-        input_flag,
+
+    run_env = os.environ.copy()
+    run_env["PWD"] = str(output_sdf.parent)
+
+    command = [         ###### IF THE ACH RUN PARAMETER CHANGES USERMUST CONFIGURE THIS PART
+        str(ligprep),   # currently it is set to default AHC run params diged from 
+        input_flag,     # /home/andy/Project/conda_envs/molscore/lib/python3.9/site-packages/molscore/scoring_functions/_ligand_preparation.py
         str(ligand_file),
         "-osd",
-        output_sdf.name,
+        str(output_sdf),        # i think this will change the log issue.
+        "-ph",
+        "7.0",
+        "-pht",
+        "1.0",
+        "-bff",
+        "16",
+        "-s",
+        "8",
         "-WAIT",
+        "-epik",
+        "-NOJOBID",
     ]
 
+    print("Running:", " ".join(command))
     subprocess.run(
         command,
         cwd=output_sdf.parent,
+        env=run_env,
         check=True,
     )
 
-    print("Running:", " ".join(command))
-    subprocess.run(command, check=True)
 
     if not output_sdf.is_file() or output_sdf.stat().st_size == 0:
         raise RuntimeError(f"LigPrep fail: {output_sdf}")
