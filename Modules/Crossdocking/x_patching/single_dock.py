@@ -41,3 +41,9 @@ if __name__ == "__main__":
 
     single_dock(args.ligand, args.grid, args.output_dir, args.precision)
 
+
+
+
+# python single_glide_dock.py --ligand ligand.sdf --grid PR_Auto_Grid.zip --output output/ligand_to_PR --precision SP
+
+
