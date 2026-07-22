@@ -151,6 +151,6 @@ Combined tables retain the original `molecule_id` and add `ligand_state`,
 
 # Future updates 
 
-Change Input format to bash .in file
+Change Input format to bash .in file \
 Change Ligprep log out dir
 
