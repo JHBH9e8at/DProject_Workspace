@@ -189,7 +189,7 @@ if __name__ == "__main__":
     parser.add_argument("--smiles-col", default="smiles")
     parser.add_argument("--limit", type=int, default=None, help="Per-arm testing limit")
     parser.add_argument(
-        "--precision", default="SP", choices=["HTVS", "SP", "XP"] help = " use SP in most cases !")
+        "--precision", default="SP", choices=["HTVS", "SP", "XP"], help = " use SP in most cases !")
     parser.add_argument("--allow-unavailable", action="store_true")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--fail-fast", action="store_true")

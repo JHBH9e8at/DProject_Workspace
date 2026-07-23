@@ -408,3 +408,12 @@ if __name__ == "__main__":
         ligand_prep_mode=args.ligand_prep_mode,
         smiles_col=args.smiles_col,
     )
+# python single_arm_docking.py \
+# --input /home/andy/proj/Results/temptesting/target.csv \
+# --run-dir /home/andy/proj/Results/AHC_Resultsbin/2026_06_02_SMILES-RNN_PPS_tester_run_2 \
+# --run-name PPS \
+# --grid /home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PR/PR_Auto_Grid.zip \
+# --output-dir /home/andy/proj/Results/temptesting/PPStoPRtest \
+# --ligand-prep-mode on \
+# --precision SP \
+# --limit 5
