@@ -18,6 +18,10 @@ Crossdocking/
 │   ├── make_glide_input.py   # create Glide input
 │   ├── run_glide.py          # run Schrodinger Glide
 │   └── extract_scores.py     # extract output pose scores
+├── s3_analysis/
+│   ├── validation.py         # double-arm input and score QC
+│   ├── selectivity.py        # paired state metrics and ranking
+│   └── run_analysis.py       # analysis CLI
 └── x_patching/               # development code and test fixtures
 ```
 
@@ -142,6 +146,30 @@ double_arm_crossdock/
 Combined tables retain the original `molecule_id` and add `ligand_state`,
 `receptor_state`, `crossdock_arm`, and a collision-safe `crossdock_id` such as
 `L_PPS_to_R_PR__2_3-2`.
+
+## Double-arm selectivity analysis
+
+After both docking arms are complete, build one paired own-state/opposite-state
+row per molecule with:
+
+```bash
+python s3_analysis/run_analysis.py \
+  --input-dir /path/to/double_arm_crossdock \
+  --output-dir /path/to/double_arm_crossdock/analysis \
+  --selectivity-threshold 2.0 \
+  --strong-score-threshold -8.0
+```
+
+The core metric is:
+
+```text
+selectivity_margin = opposite_state_score - own_state_score
+```
+
+Because more negative docking scores are better, a positive margin indicates
+preference for the molecule's original/own state. Outputs are
+`qc_report.csv`, `paired_state_scores.csv`, `selectivity_ranking.csv`, and
+`selectivity_summary.csv`.
 
 
 
