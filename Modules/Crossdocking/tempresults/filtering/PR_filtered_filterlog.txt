@@ -1,0 +1,39 @@
+input: /home/andy/proj/Results/temptesting/Testingarea1/Rawoutputs/PR_306_raw.csv
+output: /home/andy/proj/DProject_Workspace/testing/tempresults/filtering/PR_filtered.csv
+run_name: PR
+score_column: PR_r_i_docking_score
+initial_count: 19584
+
+[valid molecule]
+  before: 19584
+  after: 18492
+  removed: 1092
+
+[unique molecule]
+  before: 18492
+  after: 17052
+  removed: 1440
+
+[canonical SMILES]
+  before: 17052
+  after: 17052
+  removed: 0
+
+[usable docking result]
+  before: 17052
+  after: 17035
+  removed: 17
+
+[canonical duplicate removal]
+  before: 17035
+  after: 17035
+  removed: 0
+
+[top-10 own-state selection]
+  before: 17035
+  after: 10
+  removed: 17025
+
+PAINS_count: 0
+BRENK_count: 7
+final_count: 10

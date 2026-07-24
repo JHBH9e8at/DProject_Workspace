@@ -1,0 +1,36 @@
+# required
+pps_input=/path/to/pps_raw_scores.csv
+pps_run_dir=/path/to/PPS_AHC_results
+pr_input=/path/to/pr_raw_scores.csv
+pr_run_dir=/path/to/PR_AHC_results
+pps_grid=/path/to/pps_receptor_grid.zip
+pr_grid=/path/to/pr_receptor_grid.zip
+output_dir=/path/to/full_crossdocking_result
+
+# cross-docking options
+pps_run_name=PPS
+pr_run_name=PR
+step_col=step
+pps_variant_col=
+pr_variant_col=
+smiles_col=smiles
+# Production selection after filtering. Example: 1 means the best 1%.
+best_dscore_top_per=1
+# Optional test override. When set, top-N replaces percentage selection.
+testmode_top_n=
+precision=SP
+ligand_prep_mode=off
+allow_unavailable=off
+resume=off
+fail_fast=on
+
+# score-analysis options
+selectivity_threshold=2.0
+strong_score_threshold=-8.0
+
+# optional population-overlap inputs; set both or leave both blank
+pps_scores=
+pr_scores=
+pps_score_col=PPS_r_i_docking_score
+pr_score_col=PR_r_i_docking_score
+valid_col=valid

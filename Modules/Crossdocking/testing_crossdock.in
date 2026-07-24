@@ -1,0 +1,45 @@
+# Cross-docking test run
+#
+# The PPS and PR raw score files are used both as:
+# 1. selected cross-docking inputs, and
+# 2. raw population-overlap inputs.
+#
+# Required selected-input columns:
+# PPS: step, PPS_best_variant
+# PR : step, PR_best_variant
+
+pps_input=/home/andy/proj/Results/temptesting/Testingarea1/Rawoutputs/PPS_scores.csv
+pps_run_dir=/home/andy/proj/Results/AHC_Resultsbin/2026_06_02_SMILES-RNN_PPS_tester_run_2
+pr_input=/home/andy/proj/Results/temptesting/Testingarea1/Rawoutputs/PR_306_raw.csv
+pr_run_dir=/home/andy/proj/701/output/2026_07_07_SMILES-RNN_PR_run
+
+pps_grid=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PPS/PPSgrid.zip
+pr_grid=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PR/PR_Auto_Grid.zip
+output_dir=/home/andy/proj/DProject_Workspace/testing/tempresults
+
+pps_run_name=PPS
+pr_run_name=PR
+step_col=step
+pps_variant_col=PPS_best_variant
+pr_variant_col=PR_best_variant
+smiles_col=smiles
+
+# Production selection: top percentage of usable, deduplicated own-state binders.
+best_dscore_top_per=1
+# Testing override: when set, this top-N replaces percentage selection.
+# Leave blank for production percentage selection.
+testmode_top_n=10
+precision=SP
+ligand_prep_mode=off
+allow_unavailable=off
+resume=off
+fail_fast=on
+
+selectivity_threshold=2.0
+strong_score_threshold=-8.0
+
+pps_scores=/home/andy/proj/Results/temptesting/Testingarea1/Rawoutputs/PPS_scores.csv
+pr_scores=/home/andy/proj/Results/temptesting/Testingarea1/Rawoutputs/PR_306_raw.csv
+pps_score_col=PPS_r_i_docking_score
+pr_score_col=PR_r_i_docking_score
+valid_col=valid

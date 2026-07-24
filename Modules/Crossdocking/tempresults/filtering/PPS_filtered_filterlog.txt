@@ -1,0 +1,39 @@
+input: /home/andy/proj/Results/temptesting/Testingarea1/Rawoutputs/PPS_scores.csv
+output: /home/andy/proj/DProject_Workspace/testing/tempresults/filtering/PPS_filtered.csv
+run_name: PPS
+score_column: PPS_r_i_docking_score
+initial_count: 22784
+
+[valid molecule]
+  before: 22784
+  after: 21030
+  removed: 1754
+
+[unique molecule]
+  before: 21030
+  after: 20435
+  removed: 595
+
+[canonical SMILES]
+  before: 20435
+  after: 20435
+  removed: 0
+
+[usable docking result]
+  before: 20435
+  after: 20420
+  removed: 15
+
+[canonical duplicate removal]
+  before: 20420
+  after: 20420
+  removed: 0
+
+[top-10 own-state selection]
+  before: 20420
+  after: 10
+  removed: 20410
+
+PAINS_count: 0
+BRENK_count: 0
+final_count: 10

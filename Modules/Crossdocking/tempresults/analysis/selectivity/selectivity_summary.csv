@@ -1,0 +1,4 @@
+crossdock_arm,own_state,selectivity_class,molecule_count,mean_own_score,mean_opposite_score,mean_selectivity_margin,median_selectivity_margin
+L_PPS_to_R_PR,PPS,selective_own_state,10,-15.438460000000001,-8.237653,7.200807,7.232415
+L_PR_to_R_PPS,PR,nonselective_strong,3,-11.539766666666667,-10.718490000000001,0.8212766666666672,0.32089999999999996
+L_PR_to_R_PPS,PR,selective_own_state,7,-11.7459,-8.51606857142857,3.2298314285714285,3.34445
