@@ -12,10 +12,7 @@ analysis/
 `analysis/score` runs automatically as part of the complete cross-docking workflow. `analysis/interaction` is currently an independently runnable single-complex block and is not automatically invoked by `crossdocking_runner.py`.
 
 ---
-
-# Part I. Scientific Reasoning
-
-## 1. Analysis questions
+## Analysis questions
 
 The analysis module addresses three related but distinct questions.
 
@@ -43,7 +40,7 @@ Docking-score separation alone is not sufficient for mechanistic interpretation.
 
 This provides supporting structural evidence after score QC and selectivity ranking.
 
-## 2. Double-arm selectivity
+## Double-arm selectivity
 
 The two cross-docking arms are:
 
@@ -87,7 +84,7 @@ Thresholds control categorical labels only. Continuous own-state scores, opposit
 
 These differences are relative docking-score comparisons. They must not be interpreted as experimentally measured binding free-energy differences.
 
-## 3. Ranking policy
+## Ranking policy
 
 Candidates are ranked in the following class order:
 
@@ -107,7 +104,7 @@ Within a class, candidates are sorted by:
 
 The class-priority ranking is designed to prioritize the intended state-selective candidates. It should not obscure scientifically interesting reverse-selective or strong dual-binding molecules, which remain in the output tables with their continuous metrics.
 
-## 4. Raw-population overlap
+## Raw-population overlap
 
 The raw PPS and PR score tables are processed independently:
 
@@ -149,7 +146,7 @@ Best, median, and mean margins are retained because repeated generation can prod
 
 Important: these are original scores from independent AHC experiments. A population-overlap preference is supporting evidence only and is not equivalent to a matched cross-docking selectivity measurement.
 
-## 5. Interaction and pose-quality analysis
+## Interaction and pose-quality analysis
 
 The interaction block operates on one prepared receptor and one docked SDF/SDFGZ pose file at a time.
 
@@ -167,7 +164,7 @@ Pose-quality thresholds are optional. When supplied, they can flag results based
 
 The interaction block does not currently select candidates automatically from `selectivity_ranking.csv`. The user must provide the prepared receptor and pose file for the complex to analyze.
 
-## 6. LigPrep-aware interpretation
+## LigPrep-aware interpretation
 
 `selectivity.py` retains:
 
@@ -189,8 +186,7 @@ When analyzing LigPrep-enabled runs:
 
 # Part II. Module Architecture
 
-## 7. Layout
-
+## Layout
 ```text
 analysis/
 ├── README.md
@@ -213,7 +209,7 @@ analysis/
     └── interaction_runner.py     # interaction-block runner
 ```
 
-## 8. Score-block data flow
+## Score-block data flow
 
 ```text
 crossdocking/double_arm_manifest.csv ──────────────┐
@@ -234,7 +230,7 @@ raw PR scores.csv ───┘                       │
 
 `score_runner.py` always runs double-arm QC and selectivity. Raw-population overlap runs only when both `--pps-scores` and `--pr-scores` are supplied.
 
-## 9. Running the complete score block
+## Running the complete score block
 
 Run from the Crossdocking repository root:
 
@@ -274,7 +270,7 @@ Optional inputs:
 
 `--pps-scores` and `--pr-scores` must be supplied together or both omitted.
 
-## 10. Double-arm QC
+## Double-arm QC
 
 Before selectivity pairing, `validation.py` checks:
 
@@ -292,7 +288,7 @@ Before selectivity pairing, `validation.py` checks:
 
 Results are written to `selectivity/qc_report.csv`. Any `ERROR` prevents selectivity analysis from proceeding. A completed run should contain only `PASS` rows.
 
-## 11. Selectivity outputs
+## Selectivity outputs
 
 ```text
 analysis/selectivity/
@@ -331,7 +327,7 @@ Aggregated by cross-docking arm, own state, and selectivity class. It reports:
 - mean selectivity margin;
 - median selectivity margin.
 
-## 12. Population-overlap outputs
+## Population-overlap outputs
 
 ```text
 analysis/population_overlap/
@@ -370,7 +366,7 @@ Audit tables at the original instance level. They map each accepted raw SMILES a
 
 Rows rejected during raw-population preparation, including population, source row, exclusion reason, original SMILES, and available score. Use this file to audit coverage losses.
 
-## 13. Running interaction analysis
+## Running interaction analysis
 
 Run one prepared receptor–pose complex from the repository root:
 
@@ -411,7 +407,7 @@ Optional arguments:
 The `posecheck` and `prolif` Python dependencies must be available when their
 respective analyses are requested.
 
-## 14. Interaction outputs
+## Interaction outputs
 
 Depending on `--analysis`, the output directory contains:
 
@@ -441,7 +437,7 @@ Long-format residue interactions joined to pose metadata. When a residue map is 
 
 Records which interaction components completed, their output row counts, the receptor state, and resolved input/intermediate paths.
 
-## 15. Validated score-analysis test
+## Validated score-analysis test
 
 The score block completed successfully in the full integration test performed on **2026-07-24** with ten selected molecules per arm.
 
@@ -476,7 +472,7 @@ The three shared molecules were `inconclusive` at the configured selectivity thr
 
 The interaction block was not executed as part of this integration test.
 
-## 16. Recommended review order
+## Recommended review order
 
 For each completed analysis:
 
@@ -491,7 +487,7 @@ For each completed analysis:
 7. inspect docking poses and run interaction analysis before mechanistic
    interpretation.
 
-## 17. Limitations
+## Limitations
 
 - Docking scores are model-derived prioritization metrics, not measured binding
   affinities or free energies.
