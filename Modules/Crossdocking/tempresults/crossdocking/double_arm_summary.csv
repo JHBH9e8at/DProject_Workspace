@@ -1,3 +1,0 @@
-crossdock_arm,ligand_state,receptor_state,pipeline_status,molecule_count
-L_PPS_to_R_PR,PPS,PR,completed,10
-L_PR_to_R_PPS,PR,PPS,completed,10

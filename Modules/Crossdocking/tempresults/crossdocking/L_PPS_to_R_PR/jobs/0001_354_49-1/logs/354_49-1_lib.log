@@ -1,4 +1,0 @@
-2026-07-24 14:18:06,484 [INFO] Decompressing /home/andy/proj/Results/AHC_Resultsbin/2026_06_02_SMILES-RNN_PPS_tester_run_2/PPS_GlideDock/354/354_49-1_lib.sdfgz -> /home/andy/proj/DProject_Workspace/testing/tempresults/crossdocking/L_PPS_to_R_PR/jobs/0001_354_49-1/input/354_49-1_lib.sdf
-2026-07-24 14:18:06,484 [INFO] Input: /home/andy/proj/Results/AHC_Resultsbin/2026_06_02_SMILES-RNN_PPS_tester_run_2/PPS_GlideDock/354/354_49-1_lib.sdfgz
-2026-07-24 14:18:06,484 [INFO] Output: /home/andy/proj/DProject_Workspace/testing/tempresults/crossdocking/L_PPS_to_R_PR/jobs/0001_354_49-1/input/354_49-1_lib.sdf
-2026-07-24 14:18:06,484 [INFO] Molecule records: 1

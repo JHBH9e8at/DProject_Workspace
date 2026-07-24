@@ -1,6 +1,0 @@
-FORCEFIELD   OPLS4
-GRIDFILE   /home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PR/PR_Auto_Grid.zip
-LIGANDFILE   /home/andy/proj/DProject_Workspace/testing/tempresults/crossdocking/L_PPS_to_R_PR/jobs/0002_301_44-1/input/301_44-1_lib.sdf
-PRECISION   SP
-POSE_OUTTYPE   ligandlib_sd
-OUTPUTDIR   /home/andy/proj/DProject_Workspace/testing/tempresults/crossdocking/L_PPS_to_R_PR/jobs/0002_301_44-1

@@ -1,2 +1,0 @@
-SMILES,title,i_i_glide_lignum,docking_status,r_glide_cpu_time,r_i_docking_score,s_i_glide_gridfile,r_i_glide_gscore,r_i_glide_lipo,r_i_glide_hbond,r_i_glide_metal,r_i_glide_rewards,r_i_glide_evdw,r_i_glide_ecoul,r_i_glide_erotb,r_i_glide_esite,r_i_glide_emodel,r_i_glide_energy,r_i_glide_einternal
-NC(=O)c1ccc(NC(=O)CCC[NH2+][C@@H]2CC[C@@H](c3ccc(O)cc3)[C@H]2O)cc1,"/home/andy/proj/701/output/2026_07_07_SMILES-RNN_PR_run/PR_GlideDock/284/284_8.smi:1",1,Done,16.07,-9.63767,"PPSgrid",-9.64302,-4.03605,-0.450084,-0,-1.27811,-47.72,-15.8636,0.986758,-0.1,-99.0829,-63.5836,6.54657
