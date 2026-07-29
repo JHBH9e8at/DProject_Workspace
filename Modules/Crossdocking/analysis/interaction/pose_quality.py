@@ -17,6 +17,51 @@ def _require_posecheck():
     return PoseCheck
 
 
+def _pdb_has_explicit_hydrogens(protein_pdb):
+    with Path(protein_pdb).open("r", encoding="utf-8", errors="replace") as handle:
+        for line in handle:
+            if not line.startswith(("ATOM  ", "HETATM")):
+                continue
+            element = line[76:78].strip().upper() if len(line) >= 78 else ""
+            atom_name = line[12:16].strip().upper() if len(line) >= 16 else ""
+            if element == "H" or (not element and atom_name.startswith("H")):
+                return True
+    return False
+
+
+def _load_posecheck_protein(checker, protein_pdb):
+    """Preserve prepared receptor hydrogens; use Reduce only when they are absent."""
+    if _pdb_has_explicit_hydrogens(protein_pdb):
+        from rdkit import Chem
+
+        print(
+            "PoseCheck: explicit receptor hydrogens detected; "
+            "loading prepared PDB directly and bypassing Reduce",
+            flush=True,
+        )
+        protein = Chem.MolFromPDBFile(
+            str(protein_pdb),
+            sanitize=False,
+            removeHs=False,
+        )
+        if protein is None:
+            raise ValueError(
+                f"RDKit could not load the prepared receptor PDB: {protein_pdb}"
+            )
+        checker.protein = protein
+        print(
+            f"PoseCheck: prepared receptor loaded ({protein.GetNumAtoms()} atoms)",
+            flush=True,
+        )
+        return
+
+    print(
+        "PoseCheck: receptor has no explicit hydrogens; running Reduce",
+        flush=True,
+    )
+    checker.load_protein_from_pdb(str(protein_pdb))
+
+
 def run_posecheck(protein_pdb, ligand_sdf, pose_metadata=None):
     """Calculate raw clash and strain metrics without constructing a composite PQI."""
     protein_pdb = Path(protein_pdb).resolve()
@@ -26,10 +71,14 @@ def run_posecheck(protein_pdb, ligand_sdf, pose_metadata=None):
 
     PoseCheck = _require_posecheck()
     checker = PoseCheck()
-    checker.load_protein_from_pdb(str(protein_pdb))
+    print("PoseCheck: loading receptor", flush=True)
+    _load_posecheck_protein(checker, protein_pdb)
+    print("PoseCheck: loading ligand poses", flush=True)
     checker.load_ligands_from_sdf(str(ligand_sdf))
 
+    print("PoseCheck: calculating clashes", flush=True)
     clashes = list(checker.calculate_clashes())
+    print("PoseCheck: calculating strain energy", flush=True)
     strain = list(checker.calculate_strain_energy())
     if len(clashes) != len(strain):
         raise RuntimeError(

@@ -1,41 +1,129 @@
-"""Run the complete pose-quality and interaction-analysis block."""
+"""Run PPS/PR interaction analysis from a flat key=value configuration file."""
 
 import argparse
 
+
+REQUIRED_KEYS = {
+    "pps_results",
+    "pr_results",
+    "pps_run_dir",
+    "pr_run_dir",
+    "pps_receptor",
+    "pr_receptor",
+    "output_dir",
+}
+VALID_ONOFF = {"on", "off"}
+VALID_ANALYSIS = {"posecheck", "prolif", "both"}
+
+
+def _optional_float(cfg, key):
+    value = cfg.get(key, "").strip()
+    return float(value) if value else None
+
+
+def parse_config(path):
+    """Parse and validate a flat interaction-analysis configuration."""
+    cfg = {}
+    with open(path, "r", encoding="utf-8") as handle:
+        for lineno, raw in enumerate(handle, start=1):
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" not in line:
+                raise ValueError(
+                    f"{path}:{lineno}: invalid line (expected key=value): {raw!r}"
+                )
+            key, _, value = line.partition("=")
+            key = key.strip().lower()
+            if key in cfg:
+                raise ValueError(f"{path}:{lineno}: duplicate key: {key}")
+            cfg[key] = value.strip()
+
+    missing = sorted(key for key in REQUIRED_KEYS if not cfg.get(key))
+    if missing:
+        raise ValueError(f"{path}: missing required key(s): {missing}")
+
+    defaults = {
+        "pps_run_name": "PPS",
+        "pr_run_name": "PR",
+        "step_col": "step",
+        "pps_variant_col": "PPS_best_variant",
+        "pr_variant_col": "PR_best_variant",
+        "smiles_col": "smiles",
+        "analysis": "both",
+    }
+    for key, value in defaults.items():
+        cfg[key] = cfg.get(key, "").strip() or value
+
+    cfg["analysis"] = cfg["analysis"].lower()
+    if cfg["analysis"] not in VALID_ANALYSIS:
+        raise ValueError(
+            f"{path}: analysis must be one of {sorted(VALID_ANALYSIS)}"
+        )
+
+    for key in (
+        "include_secondary_interactions",
+        "allow_unavailable",
+        "resume",
+        "fail_fast",
+    ):
+        value = cfg.get(key, "off").strip().lower()
+        if value not in VALID_ONOFF:
+            raise ValueError(f"{path}: {key} must be 'on' or 'off'")
+        cfg[key] = value == "on"
+
+    top_n = cfg.get("testmode_top_n", "").strip()
+    cfg["testmode_top_n"] = int(top_n) if top_n else None
+    if cfg["testmode_top_n"] is not None and cfg["testmode_top_n"] <= 0:
+        raise ValueError(f"{path}: testmode_top_n must be a positive integer")
+
+    cfg["residue_map"] = cfg.get("residue_map", "").strip() or None
+    cfg["max_clashes"] = _optional_float(cfg, "max_clashes")
+    cfg["max_clashes_per_heavy_atom"] = _optional_float(
+        cfg, "max_clashes_per_heavy_atom"
+    )
+    cfg["max_strain_energy"] = _optional_float(cfg, "max_strain_energy")
+    return cfg
+
+
 def build_parser():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--protein", required=True, help="Prepared receptor PDB or MOL2")
-    parser.add_argument("--poses", required=True, help="Docked ligand SDF or SDFGZ")
-    parser.add_argument("--receptor-state", required=True, choices=["PPS", "PR"])
-    parser.add_argument("--output-dir", required=True)
-    parser.add_argument(
-        "--analysis",
-        default="both",
-        choices=["posecheck", "prolif", "both"],
-    )
-    parser.add_argument("--residue-map", help="Optional common-residue mapping CSV")
-    parser.add_argument("--include-secondary-interactions", action="store_true")
-    parser.add_argument("--max-clashes", type=float)
-    parser.add_argument("--max-clashes-per-heavy-atom", type=float)
-    parser.add_argument("--max-strain-energy", type=float)
+    parser.add_argument("--config", required=True, help="Interaction .in configuration")
     return parser
 
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
-    from .single_complex import run_single_complex
+    cfg = parse_config(args.config)
+    try:
+        from .batch_runner import run_batch_interactions
+    except ImportError:
+        from batch_runner import run_batch_interactions
 
-    return run_single_complex(
-        protein_file=args.protein,
-        pose_file=args.poses,
-        receptor_state=args.receptor_state,
-        output_dir=args.output_dir,
-        analysis=args.analysis,
-        residue_map=args.residue_map,
-        include_secondary_interactions=args.include_secondary_interactions,
-        max_clashes=args.max_clashes,
-        max_clashes_per_heavy_atom=args.max_clashes_per_heavy_atom,
-        max_strain_energy=args.max_strain_energy,
+    return run_batch_interactions(
+        pps_results=cfg["pps_results"],
+        pr_results=cfg["pr_results"],
+        pps_run_dir=cfg["pps_run_dir"],
+        pr_run_dir=cfg["pr_run_dir"],
+        pps_receptor=cfg["pps_receptor"],
+        pr_receptor=cfg["pr_receptor"],
+        output_dir=cfg["output_dir"],
+        pps_run_name=cfg["pps_run_name"],
+        pr_run_name=cfg["pr_run_name"],
+        step_col=cfg["step_col"],
+        pps_variant_col=cfg["pps_variant_col"],
+        pr_variant_col=cfg["pr_variant_col"],
+        smiles_col=cfg["smiles_col"],
+        testmode_top_n=cfg["testmode_top_n"],
+        analysis=cfg["analysis"],
+        residue_map=cfg["residue_map"],
+        include_secondary_interactions=cfg["include_secondary_interactions"],
+        max_clashes=cfg["max_clashes"],
+        max_clashes_per_heavy_atom=cfg["max_clashes_per_heavy_atom"],
+        max_strain_energy=cfg["max_strain_energy"],
+        allow_unavailable=cfg["allow_unavailable"],
+        resume=cfg["resume"],
+        fail_fast=cfg["fail_fast"],
     )
 
 

@@ -1,0 +1,35 @@
+# PPS/PR original-docking interaction analysis
+
+pps_results=/path/to/PPS/scores.csv
+pr_results=/path/to/PR/scores.csv
+pps_run_dir=/path/to/PPS/AHC_run
+pr_run_dir=/path/to/PR/AHC_run
+
+# Prepared, hydrogen-containing receptors matching the original AHC grids.
+pps_receptor=/path/to/prepared_PPS_receptor.pdb
+pr_receptor=/path/to/prepared_PR_receptor.pdb
+output_dir=/path/to/interaction_results
+
+# Optional column defaults:
+# pps_run_name=PPS
+# pr_run_name=PR
+# step_col=step
+# pps_variant_col=PPS_best_variant
+# pr_variant_col=PR_best_variant
+# smiles_col=smiles
+
+# Blank means the complete usable PPS and PR populations.
+testmode_top_n=
+
+analysis=both
+residue_map=
+include_secondary_interactions=off
+
+# Optional PoseCheck thresholds; blank records raw metrics without threshold failure.
+max_clashes=
+max_clashes_per_heavy_atom=
+max_strain_energy=
+
+allow_unavailable=off
+resume=off
+fail_fast=on

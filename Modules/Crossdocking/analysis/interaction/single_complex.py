@@ -35,6 +35,10 @@ def run_single_complex(
     )
     output_dir = Path(output_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
+    print(
+        f"[{inputs.receptor_state}] Reading pose file: {inputs.pose_file}",
+        flush=True,
+    )
     sdf_file = materialize_sdf(inputs.pose_file, output_dir / "intermediate")
     metadata = load_pose_metadata(sdf_file)
     invalid_records = metadata["pose_read_status"].ne("valid")
@@ -45,9 +49,14 @@ def run_single_complex(
         )
     metadata.insert(0, "receptor_state", inputs.receptor_state)
     metadata.to_csv(output_dir / "pose_metadata.csv", index=False)
+    print(
+        f"[{inputs.receptor_state}] Valid pose records: {len(metadata)}",
+        flush=True,
+    )
 
     statuses = []
     if analysis in {"posecheck", "both"}:
+        print(f"[{inputs.receptor_state}] PoseCheck started", flush=True)
         quality = run_posecheck(inputs.protein_file, sdf_file, metadata)
         quality = apply_pose_quality_thresholds(
             quality,
@@ -57,8 +66,10 @@ def run_single_complex(
         )
         quality.to_csv(output_dir / "pose_quality.csv", index=False)
         statuses.append(("posecheck", "completed", len(quality)))
+        print(f"[{inputs.receptor_state}] PoseCheck completed", flush=True)
 
     if analysis in {"prolif", "both"}:
+        print(f"[{inputs.receptor_state}] ProLIF started", flush=True)
         interactions, _ = run_prolif(
             inputs.protein_file,
             sdf_file,
@@ -76,6 +87,11 @@ def run_single_complex(
         )
         interactions.to_csv(output_dir / "interactions_long.csv", index=False)
         statuses.append(("prolif", "completed", len(interactions)))
+        print(
+            f"[{inputs.receptor_state}] ProLIF completed: "
+            f"{len(interactions)} interaction occurrence(s)",
+            flush=True,
+        )
 
     summary = pd.DataFrame(
         statuses, columns=["analysis_component", "status", "output_rows"]
