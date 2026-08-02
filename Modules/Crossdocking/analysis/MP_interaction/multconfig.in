@@ -1,0 +1,27 @@
+# MP_interaction full-population configuration.
+# CPU affinity is applied at launch with: taskset -c 0-29
+
+pps_results=/home/andy/proj/Results/AHC_Resultsbin/SMILES-RNN_PPSrun/scores.csv
+pr_results=/home/andy/proj/Results/AHC_Resultsbin/SMILES-RNN_PRrun/scores.csv
+
+pps_run_dir=/home/andy/proj/Results/AHC_Resultsbin/SMILES-RNN_PPSrun
+pr_run_dir=/home/andy/proj/Results/AHC_Resultsbin/SMILES-RNN_PRrun
+
+pps_receptor=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PPS_Protein_no_conect.pdb
+pr_receptor=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PR_Protein_no_conect.pdb
+
+output_dir=/home/andy/proj/Results/temptesting/intertesting_mp_both
+
+# Blank means use the complete usable population.
+testmode_top_n=
+analysis=both
+
+# Thirty workers restricted to logical CPU IDs 0-29 by taskset.
+posecheck_workers=30
+posecheck_chunk_size=250
+prolif_workers=30
+
+include_secondary_interactions=off
+allow_unavailable=off
+resume=on
+fail_fast=on
