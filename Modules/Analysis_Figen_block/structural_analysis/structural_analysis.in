@@ -6,11 +6,11 @@ resume=OFF
 
 # Enable at least one block
 pocket_volume=ON
-redocking=OFF
+redocking=ON
 
 # Pocket-volume inputs and options
-fpocket_dir=/path/to/fpocket_output
-targets=1
+fpocket_dir=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out
+targets=2,38,51
 ligand=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/ligand_2OW.pdb
 ligand_resname=
 distance_threshold=3.0
@@ -22,9 +22,9 @@ radius_offset=-1.6
 output_prefix=ligand_local_pocket_volume
 
 # Redocking inputs and plotting ranges
-pps_docking_csv=/path/to/PPS_docking.csv
-pps_rmsd_csv=/path/to/PPS_RMSD.csv
-pr_docking_csv=/path/to/PR_docking.csv
-pr_rmsd_csv=/path/to/PR_RMSD.csv
+pps_docking_csv=/home/andy/proj/work_results/Redocking/PPS_docking.csv
+pps_rmsd_csv=/home/andy/proj/work_results/Redocking/PPS_RMSD.csv
+pr_docking_csv=/home/andy/proj/work_results/Redocking/PR_docking.csv
+pr_rmsd_csv=/home/andy/proj/work_results/Redocking/PR_RMSD.csv
 score_ylim=-12,-1
 rmsd_ylim=0,2.5

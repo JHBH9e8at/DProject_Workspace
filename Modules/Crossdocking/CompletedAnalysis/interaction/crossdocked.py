@@ -186,6 +186,8 @@ def _collect_outputs(job_dir: Path, source_map: pd.DataFrame,
             ]
             table = table.merge(annotations, on="pose_index", how="left",
                                 validate="many_to_one")
+            if "ligand_state" in table.columns and "population_state" not in table.columns:
+                table["population_state"] = table["ligand_state"]
         else:
             arm = source_map.iloc[0]
             for column in ("crossdock_arm", "ligand_state", "receptor_state"):

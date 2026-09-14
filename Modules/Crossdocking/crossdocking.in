@@ -20,9 +20,12 @@ fail_fast=on
 
 # Completed analysis
 score_analysis=on
-interaction_analysis=off
+interaction_analysis=on
+reference_interaction_analysis=on
 pps_receptor=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PPS_Protein_no_conect.pdb
 pr_receptor=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PR_Protein_no_conect.pdb
+pps_reference_ligand=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PPS_ligand.sdfgz
+pr_reference_ligand=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PR_ligand.sdfgz
 interaction_mode=both
 include_secondary_interactions=off
 selectivity_threshold=2.0
@@ -30,7 +33,7 @@ strong_score_threshold=-8.0
 
 # Multiprocessing applies only to completed interaction analysis.
 # Glide cross-docking itself always runs sequentially.
-multiprocessing=off
+multiprocessing=on
 posecheck_workers=30
 posecheck_chunk_size=auto
 prolif_workers=30

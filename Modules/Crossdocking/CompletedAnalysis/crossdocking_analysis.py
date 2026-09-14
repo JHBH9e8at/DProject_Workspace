@@ -10,6 +10,7 @@ from pathlib import Path
 from Modules.Analysis_Figen_block.common.paths import validate_results_root
 
 from .interaction.crossdocked import run_crossdock_interactions
+from .interaction.reference import run_reference_interactions
 from .score.score_workflow import run_score_analysis
 
 
@@ -46,13 +47,16 @@ def parse_config(config_path: str | Path) -> dict[str, object]:
     base = path.parent
     cfg: dict[str, object] = dict(raw)
     cfg["results_root"] = validate_results_root(_path(raw["results_root"], base))
-    for key in ("calculation_manifest", "pps_input", "pr_input", "pps_receptor", "pr_receptor"):
+    for key in ("calculation_manifest", "pps_input", "pr_input", "pps_receptor", "pr_receptor", "pps_reference_ligand", "pr_reference_ligand"):
         cfg[key] = _path(raw[key], base) if raw.get(key) else None
     if cfg["calculation_manifest"] is None and raw.get("output_dir"):
         cfg["calculation_manifest"] = _path(raw["output_dir"], base) / "crossdocking_calculation_manifest.json"
 
     cfg["score_analysis"] = _on_off(raw.get("score_analysis", "on"), "score_analysis")
     cfg["interaction_analysis"] = _on_off(raw.get("interaction_analysis", "off"), "interaction_analysis")
+    cfg["reference_interaction_analysis"] = _on_off(
+        raw.get("reference_interaction_analysis", "off"), "reference_interaction_analysis"
+    )
     cfg["multiprocessing"] = _on_off(raw.get("multiprocessing", "off"), "multiprocessing")
     cfg["resume"] = _on_off(raw.get("resume", "off"), "resume")
     cfg["include_secondary_interactions"] = _on_off(
@@ -76,6 +80,12 @@ def parse_config(config_path: str | Path) -> dict[str, object]:
         raise ValueError("analysis requires calculation_manifest or output_dir")
     if cfg["interaction_analysis"] and (cfg["pps_receptor"] is None or cfg["pr_receptor"] is None):
         raise ValueError("interaction_analysis=on requires pps_receptor and pr_receptor")
+    if cfg["reference_interaction_analysis"] and any(
+        cfg[key] is None for key in ("pps_receptor", "pr_receptor", "pps_reference_ligand", "pr_reference_ligand")
+    ):
+        raise ValueError(
+            "reference_interaction_analysis=on requires both receptors and both reference ligands"
+        )
     cfg["config_path"] = path
     return cfg
 
@@ -110,6 +120,18 @@ def run(config_path: str | Path) -> dict[str, object]:
         }
         run_crossdock_interactions(interaction_cfg)
         completed.append("interaction_mp" if workers else "interaction_standard")
+
+    if cfg["reference_interaction_analysis"]:
+        workers = bool(cfg["multiprocessing"])
+        run_reference_interactions(
+            pps_receptor=cfg["pps_receptor"], pr_receptor=cfg["pr_receptor"],
+            pps_ligand=cfg["pps_reference_ligand"], pr_ligand=cfg["pr_reference_ligand"],
+            results_root=cfg["results_root"], run_id=str(cfg["run_id"]),
+            include_secondary_interactions=bool(cfg["include_secondary_interactions"]),
+            prolif_workers=cfg["prolif_workers"] if workers else 1,
+            resume=bool(cfg["resume"]),
+        )
+        completed.append("reference_interactions")
 
     summary = {
         "status": "completed", "run_id": cfg["run_id"], "blocks": completed,

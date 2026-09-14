@@ -9,8 +9,8 @@ run_id=PR_PPS_completed
 # Blocks: on/off
 physchem=on
 last_window=on
-scaffold=off
-chemical_space=off
+scaffold=on
+chemical_space=on
 
 # Common options
 reference=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/ref_desc.csv

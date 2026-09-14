@@ -4,8 +4,8 @@ run_id=PR_PPS_figures
 resume=OFF
 
 # Enable one or more standalone figure blocks
-ahc_physchem=OFF
-chemical_space=OFF
+ahc_physchem=ON
+chemical_space=ON
 physchem_last_window=ON
 hotspot_full_last=OFF
 hotspot_top_candidates=OFF
@@ -21,7 +21,7 @@ descriptors=desc_MolWt,desc_NumRotatableBonds,desc_CLogP
 mw_upper_bound=
 
 # Chemical-space cache
-cache_path=/path/to/joint_umap_fp.csv.gz
+cache_path=/home/andy/proj/work_results/analysis/chemical_space/PR_PPS_analysis_chemical_space/tables/joint_umap_fp.csv.gz
 
 # PR/PPS last-window comparison
 pr_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PRrun/scores.csv
@@ -31,24 +31,24 @@ pr_threshold=-6.0
 pps_threshold=-9.0
 
 # Full/last hotspot figure
-full_csv=/path/to/full_prevalence.csv
-last_csv=/path/to/last_window_prevalence.csv
-typed_csv=/path/to/interaction_type_prevalence.csv
-pocket_files=PPS=/path/to/PPS_pocket.txt,PR=/path/to/PR_pocket.txt
-reference_csv=/path/to/reference_interactions.csv
+full_csv=
+last_csv=
+typed_csv=/home/andy/proj/work_results/analysis/residue_hotspot/PR_PPS_analysis_residue_hotspot/tables/interaction_type_prevalence.csv
+pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
+reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/PR_PPS_crossdocking/reference_interactions.csv
 denominators=PPS=200,PR=200
 
 # Top-candidate hotspot figure
-top_own_csv=/path/to/own_prevalence.csv
-top_opposite_csv=/path/to/opposite_prevalence.csv
-top_typed_csv=/path/to/own_type_prevalence.csv
-top_pocket_files=PPS=/path/to/PPS_pocket.txt,PR=/path/to/PR_pocket.txt
-top_reference_csv=/path/to/reference_interactions.csv
+top_own_csv=
+top_opposite_csv=
+top_typed_csv=
+top_pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
+top_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/PR_PPS_crossdocking/reference_interactions.csv
 top_denominators=PPS=5,PR=5
 
 # Own/opposite hotspot figure
-ownopp_prevalence_csv=/path/to/own_opposite_residue_prevalence.csv
-ownopp_typed_csv=/path/to/own_interaction_type_prevalence.csv
-ownopp_pocket_files=PPS=/path/to/PPS_pocket.txt,PR=/path/to/PR_pocket.txt
-ownopp_reference_csv=/path/to/reference_interactions.csv
+ownopp_prevalence_csv=
+ownopp_typed_csv=
+ownopp_pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
+ownopp_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/PR_PPS_crossdocking/reference_interactions.csv
 ownopp_denominators=PPS=5,PR=5
