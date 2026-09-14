@@ -1,6 +1,6 @@
 {
-    "task": "PPS_tester_run_2",
-    "output_dir": "/home/andy/proj/701/output",
+    "task": "SMILES-RNN_PPSrun",
+    "output_dir": "/home/andy/proj/work_results/AHC_Resultsbin",
     "load_from_previous": false,
     "logging": false,
     "monitor_app": false,
