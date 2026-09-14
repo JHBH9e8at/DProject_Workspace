@@ -1,6 +1,6 @@
 # Run: python run_structural_analysis.py --config structural_analysis.in
 
-results_root=..\..\..\..\work_results
+results_root=/home/andy/proj/work_results
 run_id=PR_PPS_structural
 resume=OFF
 
@@ -9,9 +9,9 @@ pocket_volume=ON
 redocking=OFF
 
 # Pocket-volume inputs and options
-fpocket_dir=path\to\fpocket_output
+fpocket_dir=/path/to/fpocket_output
 targets=1
-ligand=path\to\reference_ligand.pdb
+ligand=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/ligand_2OW.pdb
 ligand_resname=
 distance_threshold=3.0
 all_spheres=OFF
@@ -22,9 +22,9 @@ radius_offset=-1.6
 output_prefix=ligand_local_pocket_volume
 
 # Redocking inputs and plotting ranges
-pps_docking_csv=path\to\PPS_docking.csv
-pps_rmsd_csv=path\to\PPS_RMSD.csv
-pr_docking_csv=path\to\PR_docking.csv
-pr_rmsd_csv=path\to\PR_RMSD.csv
+pps_docking_csv=/path/to/PPS_docking.csv
+pps_rmsd_csv=/path/to/PPS_RMSD.csv
+pr_docking_csv=/path/to/PR_docking.csv
+pr_rmsd_csv=/path/to/PR_RMSD.csv
 score_ylim=-12,-1
 rmsd_ylim=0,2.5

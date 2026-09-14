@@ -1,4 +1,4 @@
 FORCEFIELD   OPLS4
-GRIDFILE   /home/andy/proj/701/Struct/Grids/PPS/PPSgrid.zip
+GRIDFILE   /home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PPS/PPSgrid.zip
 LIGANDFILE   ligand_file.sdf
 PRECISION   SP

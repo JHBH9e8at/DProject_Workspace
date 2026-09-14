@@ -2,8 +2,9 @@
 
 Use one Python entry point for a normal monitoring run:
 
-```powershell
-python run_monitor.py --config t_mp.in
+```bash
+python run_monitor.py --config t_mp_pr.in
+python run_monitor.py --config t_mp_pps.in
 ```
 
 Scripts under `blocks/` are internal implementation units and normally should

@@ -1,9 +1,9 @@
 # Run: python run_analysis.py --config analysis.in
 
 # Required
-pr_input=..\..\..\..\Resultsbin\AHC_results\PR\PR_scores.csv
-pps_input=..\..\..\..\Resultsbin\AHC_results\PPS\PPS_scores.csv
-results_root=..\..\..\..\work_results
+pr_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PRrun/scores.csv
+pps_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PPSrun/scores.csv
+results_root=/home/andy/proj/work_results
 run_id=PR_PPS_completed
 
 # Blocks: on/off
@@ -13,7 +13,7 @@ scaffold=off
 chemical_space=off
 
 # Common options
-reference=..\..\..\AHC_Related\ref_structures\ref_desc.csv
+reference=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/ref_desc.csv
 last_n=50
 # resume: on/off (default off)
 resume=off

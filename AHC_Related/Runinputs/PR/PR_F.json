@@ -31,7 +31,7 @@
         "run": true,
         "parameters": {
           "prefix": "PR",
-          "glide_template": "/home/andy/proj/701/input/Runfiles/PR_Runs/new/PRGlide.in",
+          "glide_template": "/home/andy/proj/DProject_Workspace/AHC_Related/Runinputs/PR/PRGlide.in",
           "cluster": "tcp://138.37.52.153:8786",
           "timeout": 600.0,
           "ligand_preparation": "ligprep"

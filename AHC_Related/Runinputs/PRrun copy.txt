@@ -9,7 +9,7 @@ dask-scheduler --port 8786 --dashboard-address :8787 &
 dask-worker tcp://138.37.52.153:8786 --nworkers 8 --nthreads 1 --local-directory /home/andy/proj/701/output/dask_cache &
 python /home/andy/Project/MolScore_related/SMILES-RNN-main/reinforcement_learning.py \
 -p /home/andy/Project/MolScore_related/SMILES-RNN-main/priors/ChEMBL28pur.ckpt \
--m /home/andy/proj/701/input/Runfiles/PR_Runs/PR_base.json \
+-m /home/andy/proj/DProject_Workspace/AHC_Related/Runinputs/PR/PR_F.json \
 --model RNN \
 AHC
 

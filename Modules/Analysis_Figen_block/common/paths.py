@@ -19,7 +19,7 @@ def _as_directory(path: str | os.PathLike[str] | Path) -> Path:
 def discover_project_root(
     start: str | os.PathLike[str] | Path | None = None,
 ) -> Path:
-    """Find the directory containing the sibling work_space/work_results roots."""
+    """Find either a legacy workspace container or a standalone repository root."""
 
     current = _as_directory(start or __file__)
     for candidate in (current, *current.parents):
@@ -27,13 +27,12 @@ def discover_project_root(
             return candidate.parent
         if (candidate / WORKING_DIRECTORY_NAME).is_dir():
             return candidate
-        if (
-            (candidate / "Modules" / "Analysis_Figen_block").is_dir()
-            and (candidate / "requirements").is_dir()
-        ):
+        if (candidate / "Modules" / "Analysis_Figen_block").is_dir():
             return candidate
     raise FileNotFoundError(
-        f"Could not find a {WORKING_DIRECTORY_NAME!r} ancestor from {current}"
+        "Could not find a repository containing "
+        f"'Modules/Analysis_Figen_block' or a {WORKING_DIRECTORY_NAME!r} "
+        f"workspace from {current}"
     )
 
 
@@ -63,7 +62,14 @@ def get_results_root(
         if project_root is not None
         else discover_project_root()
     )
-    results_root = root / RESULTS_DIRECTORY_NAME
+    # In a standalone clone such as ``/home/andy/proj/DProject_Workspace``,
+    # generated results belong beside the repository.  In the legacy layout,
+    # ``root`` already denotes the container holding ``work_space``.
+    standalone_repository = (
+        root / "Modules" / "Analysis_Figen_block"
+    ).is_dir()
+    results_parent = root.parent if standalone_repository else root
+    results_root = results_parent / RESULTS_DIRECTORY_NAME
     if create:
         results_root.mkdir(parents=True, exist_ok=True)
     return results_root

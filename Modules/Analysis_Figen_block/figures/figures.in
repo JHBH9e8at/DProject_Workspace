@@ -1,5 +1,5 @@
 # Run: python run_figures.py --config figures.in
-results_root=..\..\..\..\work_results
+results_root=/home/andy/proj/work_results
 run_id=PR_PPS_figures
 resume=OFF
 
@@ -12,43 +12,43 @@ hotspot_top_candidates=OFF
 own_opposite=OFF
 
 # AHC physicochemical/trajectory
-ahc_input=path\to\scores.csv
+ahc_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PPSrun/scores.csv
 ahc_job_name=PPS
 ahc_threshold=-9.0
-reference=..\..\..\AHC_Related\ref_structures\ref_desc.csv
+reference=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/ref_desc.csv
 ref_keys=OM
 descriptors=desc_MolWt,desc_NumRotatableBonds,desc_CLogP
 mw_upper_bound=
 
 # Chemical-space cache
-cache_path=path\to\joint_umap_fp.csv.gz
+cache_path=/path/to/joint_umap_fp.csv.gz
 
 # PR/PPS last-window comparison
-pr_input=path\to\PR_scores.csv
-pps_input=path\to\PPS_scores.csv
+pr_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PRrun/scores.csv
+pps_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PPSrun/scores.csv
 last_n=50
 pr_threshold=-6.0
 pps_threshold=-9.0
 
 # Full/last hotspot figure
-full_csv=path\to\full_prevalence.csv
-last_csv=path\to\last_window_prevalence.csv
-typed_csv=path\to\interaction_type_prevalence.csv
-pocket_files=PPS=path\to\PPS_pocket.txt,PR=path\to\PR_pocket.txt
-reference_csv=path\to\reference_interactions.csv
+full_csv=/path/to/full_prevalence.csv
+last_csv=/path/to/last_window_prevalence.csv
+typed_csv=/path/to/interaction_type_prevalence.csv
+pocket_files=PPS=/path/to/PPS_pocket.txt,PR=/path/to/PR_pocket.txt
+reference_csv=/path/to/reference_interactions.csv
 denominators=PPS=200,PR=200
 
 # Top-candidate hotspot figure
-top_own_csv=path\to\own_prevalence.csv
-top_opposite_csv=path\to\opposite_prevalence.csv
-top_typed_csv=path\to\own_type_prevalence.csv
-top_pocket_files=PPS=path\to\PPS_pocket.txt,PR=path\to\PR_pocket.txt
-top_reference_csv=path\to\reference_interactions.csv
+top_own_csv=/path/to/own_prevalence.csv
+top_opposite_csv=/path/to/opposite_prevalence.csv
+top_typed_csv=/path/to/own_type_prevalence.csv
+top_pocket_files=PPS=/path/to/PPS_pocket.txt,PR=/path/to/PR_pocket.txt
+top_reference_csv=/path/to/reference_interactions.csv
 top_denominators=PPS=5,PR=5
 
 # Own/opposite hotspot figure
-ownopp_prevalence_csv=path\to\own_opposite_residue_prevalence.csv
-ownopp_typed_csv=path\to\own_interaction_type_prevalence.csv
-ownopp_pocket_files=PPS=path\to\PPS_pocket.txt,PR=path\to\PR_pocket.txt
-ownopp_reference_csv=path\to\reference_interactions.csv
+ownopp_prevalence_csv=/path/to/own_opposite_residue_prevalence.csv
+ownopp_typed_csv=/path/to/own_interaction_type_prevalence.csv
+ownopp_pocket_files=PPS=/path/to/PPS_pocket.txt,PR=/path/to/PR_pocket.txt
+ownopp_reference_csv=/path/to/reference_interactions.csv
 ownopp_denominators=PPS=5,PR=5

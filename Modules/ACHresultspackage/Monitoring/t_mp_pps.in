@@ -1,0 +1,13 @@
+# PPS AHC in-run monitoring.
+analysismode=mp
+basedir=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PPSrun/iterations
+odir=/home/andy/proj/work_results/AHC_monitoring/PPS
+jn=PPS
+threshold=-9.0
+
+# Optional settings
+ref=OM
+umap=off
+tsne=off
+mode=both
+feat=both

@@ -22,7 +22,10 @@ directly.
 
 ```bash
 python Modules/ACHresultspackage/Monitoring/run_monitor.py \
-  --config Modules/ACHresultspackage/Monitoring/t_mp.in
+  --config Modules/ACHresultspackage/Monitoring/t_mp_pr.in
+
+python Modules/ACHresultspackage/Monitoring/run_monitor.py \
+  --config Modules/ACHresultspackage/Monitoring/t_mp_pps.in
 ```
 
 ### Analyse completed AHC results
