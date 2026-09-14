@@ -7,6 +7,7 @@ resume=OFF
 ahc_physchem=ON
 chemical_space=ON
 physchem_last_window=ON
+interaction_hotspot=ON
 hotspot_full_last=OFF
 hotspot_top_candidates=OFF
 own_opposite=OFF
@@ -21,7 +22,7 @@ descriptors=desc_MolWt,desc_NumRotatableBonds,desc_CLogP
 mw_upper_bound=
 
 # Chemical-space cache
-cache_path=/home/andy/proj/work_results/analysis/chemical_space/PR_PPS_analysis_chemical_space/tables/joint_umap_fp.csv.gz
+cache_path=/home/andy/proj/work_results/analysis/chemical_space/PR_PPS_completed_chemical_space/tables/joint_umap_fp.csv.gz
 
 # PR/PPS last-window comparison
 pr_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PRrun/scores.csv
@@ -29,6 +30,12 @@ pps_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PPSrun/scores.c
 last_n=50
 pr_threshold=-6.0
 pps_threshold=-9.0
+
+# Crossdocking interaction hotspot
+interaction_residue_csv=/home/andy/proj/work_results/analysis/residue_hotspot/PR_PPS_analysis_residue_hotspot/tables/residue_prevalence.csv
+interaction_typed_csv=/home/andy/proj/work_results/analysis/residue_hotspot/PR_PPS_analysis_residue_hotspot/tables/interaction_type_prevalence.csv
+interaction_pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
+interaction_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/CDres_LP_ON/reference_interactions.csv
 
 # Full/last hotspot figure
 full_csv=

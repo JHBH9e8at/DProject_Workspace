@@ -3,8 +3,14 @@
 import argparse
 import hashlib
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+WORKING_ROOT = HERE.parents[1]
+if str(WORKING_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKING_ROOT))
 
 from Modules.Analysis_Figen_block.common.paths import assert_within, validate_results_root
 

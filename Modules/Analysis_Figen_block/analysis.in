@@ -5,7 +5,7 @@ run_id=PR_PPS_analysis
 dry_run=OFF
 
 # Modules execute in the fixed order shown below
-ahc_analysis=ON
+ahc_analysis=OFF
 ahc_config=/home/andy/proj/DProject_Workspace/Modules/Analysis_Figen_block/ahc_analysis/ahc_analysis.in
 
 structural_analysis=ON

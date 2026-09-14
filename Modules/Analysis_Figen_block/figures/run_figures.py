@@ -18,13 +18,15 @@ from Modules.Analysis_Figen_block.figures.blocks.ahc_physchem_trajectory_workflo
 from Modules.Analysis_Figen_block.figures.blocks.chemical_space_workflow import run_chemical_space_figures  # noqa: E402
 from Modules.Analysis_Figen_block.figures.blocks.physchem_last_window_workflow import run_last_window  # noqa: E402
 from Modules.Analysis_Figen_block.figures.blocks.hotspot_variants_workflow import run_full_last_figure, run_top_candidate_figure  # noqa: E402
+from Modules.Analysis_Figen_block.figures.blocks.interaction_hotspot_workflow import run_interaction_hotspot  # noqa: E402
 from Modules.Analysis_Figen_block.figures.blocks.own_opposite_hotspot_workflow import run_figure as run_own_opposite_figure  # noqa: E402
 
-TOGGLES = ("ahc_physchem", "chemical_space", "physchem_last_window", "hotspot_full_last", "hotspot_top_candidates", "own_opposite")
+TOGGLES = ("ahc_physchem", "chemical_space", "physchem_last_window", "interaction_hotspot", "hotspot_full_last", "hotspot_top_candidates", "own_opposite")
 ALLOWED_KEYS = {
     "results_root", "run_id", "resume", *TOGGLES,
     "ahc_input", "ahc_job_name", "ahc_threshold", "reference", "ref_keys", "descriptors", "mw_upper_bound",
     "cache_path", "pr_input", "pps_input", "last_n", "pr_threshold", "pps_threshold",
+    "interaction_residue_csv", "interaction_typed_csv", "interaction_pocket_files", "interaction_reference_csv",
     "full_csv", "last_csv", "typed_csv", "pocket_files", "reference_csv", "denominators",
     "top_own_csv", "top_opposite_csv", "top_typed_csv", "top_pocket_files", "top_reference_csv", "top_denominators",
     "ownopp_prevalence_csv", "ownopp_typed_csv", "ownopp_pocket_files", "ownopp_reference_csv", "ownopp_denominators",
@@ -58,6 +60,7 @@ def parse_config(config_path: str | Path) -> dict[str, object]:
         "ahc_physchem": ("ahc_input", "ahc_job_name", "ahc_threshold"),
         "chemical_space": ("cache_path",),
         "physchem_last_window": ("pr_input", "pps_input"),
+        "interaction_hotspot": ("interaction_residue_csv", "interaction_typed_csv", "interaction_pocket_files", "interaction_reference_csv"),
         "hotspot_full_last": ("full_csv", "last_csv", "typed_csv", "pocket_files", "reference_csv", "denominators"),
         "hotspot_top_candidates": ("top_own_csv", "top_opposite_csv", "top_typed_csv", "top_pocket_files", "top_reference_csv", "top_denominators"),
         "own_opposite": ("ownopp_prevalence_csv", "ownopp_typed_csv", "ownopp_pocket_files", "ownopp_reference_csv", "ownopp_denominators"),
@@ -65,7 +68,7 @@ def parse_config(config_path: str | Path) -> dict[str, object]:
     for block, keys in requirements.items():
         if cfg[block]:
             require_values(raw, keys, source=document.path)
-    path_keys = ("ahc_input", "reference", "cache_path", "pr_input", "pps_input", "full_csv", "last_csv", "typed_csv", "reference_csv", "top_own_csv", "top_opposite_csv", "top_typed_csv", "top_reference_csv", "ownopp_prevalence_csv", "ownopp_typed_csv", "ownopp_reference_csv")
+    path_keys = ("ahc_input", "reference", "cache_path", "pr_input", "pps_input", "interaction_residue_csv", "interaction_typed_csv", "interaction_reference_csv", "full_csv", "last_csv", "typed_csv", "reference_csv", "top_own_csv", "top_opposite_csv", "top_typed_csv", "top_reference_csv", "ownopp_prevalence_csv", "ownopp_typed_csv", "ownopp_reference_csv")
     for key in path_keys:
         cfg[key] = resolve_config_path(raw[key], document.path) if raw.get(key) else None
     cfg.update({
@@ -80,7 +83,7 @@ def parse_config(config_path: str | Path) -> dict[str, object]:
     })
     for key in ("denominators", "top_denominators", "ownopp_denominators"):
         cfg[key] = _int_map(raw[key], key) if raw.get(key) else None
-    for key in ("pocket_files", "top_pocket_files", "ownopp_pocket_files"):
+    for key in ("interaction_pocket_files", "pocket_files", "top_pocket_files", "ownopp_pocket_files"):
         cfg[key] = _path_map(raw[key], key, document.path) if raw.get(key) else None
     return cfg
 
@@ -104,6 +107,15 @@ def run(config_path: str | Path, *, run_id: str | None = None,
     if cfg["physchem_last_window"]:
         outputs["physchem_last_window"] = run_last_window(pr_csv=cfg["pr_input"], pps_csv=cfg["pps_input"], last_n=cfg["last_n"], pr_threshold=cfg["pr_threshold"], pps_threshold=cfg["pps_threshold"], run_id=f"{cfg['run_id']}_last_window", **common)
         completed.append("physchem_last_window")
+    if cfg["interaction_hotspot"]:
+        outputs["interaction_hotspot"] = run_interaction_hotspot(
+            residue_csv=cfg["interaction_residue_csv"],
+            typed_csv=cfg["interaction_typed_csv"],
+            pocket_files=cfg["interaction_pocket_files"],
+            reference_csv=cfg["interaction_reference_csv"],
+            run_id=f"{cfg['run_id']}_interaction_hotspot", **common,
+        )
+        completed.append("interaction_hotspot")
     if cfg["hotspot_full_last"]:
         outputs["hotspot_full_last"] = run_full_last_figure(full_csv=cfg["full_csv"], last_csv=cfg["last_csv"], typed_csv=cfg["typed_csv"], pocket_files=cfg["pocket_files"], reference_csv=cfg["reference_csv"], denominators=cfg["denominators"], run_id=f"{cfg['run_id']}_hotspot_full_last", **common)
         completed.append("hotspot_full_last")
