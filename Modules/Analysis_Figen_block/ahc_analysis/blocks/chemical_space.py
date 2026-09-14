@@ -37,6 +37,8 @@ def load_source(path, source):
     missing = [column for column in ("smiles", "step", score_column) if column not in frame]
     if missing:
         raise ValueError(f"{source}: missing columns {missing}")
+    # Apply the same population identity rules used by the other AHC analyses:
+    # valid rows, nonzero scores, valid canonical SMILES, and one best instance.
     if "valid" in frame:
         frame = frame[frame.valid.astype(str).str.lower().eq("true")].copy()
     frame[score_column] = pd.to_numeric(frame[score_column], errors="coerce")
@@ -99,6 +101,9 @@ def calculate_embedding(frame, *, method, feature, random_state=42):
         selected = frame.dropna(subset=columns).copy()
         population = selected[selected.source.isin(("PR", "PPS"))].copy()
         references = selected[selected.source.eq("REF")].copy()
+        # Descriptor standardization is fitted only to generated molecules:
+        #     z = (x − population_mean) / population_standard_deviation
+        # Reference compounds are projected with the same fitted transformation.
         scaler = StandardScaler()
         population_matrix = scaler.fit_transform(population[columns].astype(float))
         reference_matrix = scaler.transform(references[columns].astype(float))
@@ -107,6 +112,8 @@ def calculate_embedding(frame, *, method, feature, random_state=42):
     selected = pd.concat((population, references), ignore_index=True)
     if method == "umap":
         import umap
+        # UMAP learns the PR/PPS population manifold first. References are then
+        # transformed into that fixed space so they do not alter the embedding.
         reducer = umap.UMAP(n_neighbors=15, min_dist=.1,
                             metric="jaccard" if population_matrix.dtype == np.uint8 else "euclidean",
                             random_state=random_state)
@@ -114,6 +121,8 @@ def calculate_embedding(frame, *, method, feature, random_state=42):
                                reducer.transform(reference_matrix)))
         projection = "transform"
     elif method == "tsne":
+        # sklearn t-SNE has no transform method; populations and references must
+        # therefore be fitted jointly for this representation.
         matrix = np.vstack((population_matrix, reference_matrix))
         embedding = TSNE(n_components=2, perplexity=30, init="pca",
                          learning_rate="auto", random_state=random_state).fit_transform(matrix)

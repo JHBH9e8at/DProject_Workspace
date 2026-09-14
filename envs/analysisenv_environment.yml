@@ -1,0 +1,15 @@
+name: analysisenv
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - scikit-learn
+  - rdkit
+  - ipykernel
+  - pandas
+  - matplotlib
+  - numpy
+  - seaborn
+  - fpocket
+  - prolif
+prefix: /home/andy/Project/conda_envs/analysisenv

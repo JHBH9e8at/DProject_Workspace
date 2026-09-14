@@ -56,8 +56,11 @@ def clean_population(
     def record(name: str, before: int, after: int) -> None:
         steps.append({"step": name, "before": before, "after": after, "removed": before - after})
 
-    valid = frame[frame["valid"] == True].copy()  # preserve legacy equality semantics
+    # Cleaning 1 — preserve the legacy strict Boolean validity semantics so the
+    # refactored output remains numerically identical to the original workflow.
+    valid = frame[frame["valid"] == True].copy()
     record("valid filter", len(frame), len(valid))
+    # Cleaning 2 — remove instances rejected by the AHC uniqueness flag.
     unique = valid[valid["unique"] == True].copy()
     record("unique filter", len(valid), len(unique))
 
@@ -71,6 +74,7 @@ def clean_population(
         except Exception:
             return None, None
 
+    # Cleaning 3 — canonicalize molecular identity and discard invalid SMILES.
     canonicalized = unique.copy()
     converted = canonicalized["smiles"].apply(canonicalize)
     canonicalized["canon_smiles"] = converted.apply(lambda item: item[0])
@@ -79,6 +83,8 @@ def clean_population(
     record("canonical conversion filter", len(unique), len(canonicalized))
 
     score_column = f"{run_name}_r_i_docking_score"
+    # Cleaning 4 — collapse equivalent SMILES representations. Glide scores are
+    # minimized, so idxmin selects the best-scoring instance of each molecule.
     best_indices = canonicalized.groupby("canon_smiles")[score_column].idxmin()
     cleaned = canonicalized.loc[best_indices].copy().reset_index(drop=True)
     record("duplicate removal (best per canon_smiles)", len(canonicalized), len(cleaned))
@@ -89,6 +95,7 @@ def clean_population(
     brenk_params = FilterCatalogParams()
     brenk_params.AddCatalog(FilterCatalogParams.FilterCatalogs.BRENK)
     brenk_catalog = FilterCatalog(brenk_params)
+    # Structural alerts are annotations, not exclusion filters.
     cleaned["PAINS"] = cleaned["_mol"].apply(pains_catalog.HasMatch)
     cleaned["BRENK"] = cleaned["_mol"].apply(brenk_catalog.HasMatch)
     return cleaned.drop(columns=["_mol"]), steps

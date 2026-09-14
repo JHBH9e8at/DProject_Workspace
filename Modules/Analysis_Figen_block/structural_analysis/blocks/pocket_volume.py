@@ -111,11 +111,15 @@ def monte_carlo_union_volume(
 
     centres = np.asarray([sphere.centre for sphere in spheres], dtype=float)
     raw_radii = np.asarray([sphere.radius for sphere in spheres], dtype=float)
+    # Fpocket-compatible effective radius:
+    #     r_eff = r_raw + Δr, with Δr = -1.6 Å by default.
     radii = raw_radii + radius_offset
     if np.any(radii <= 0):
         raise ValueError(
             "The radius offset produces a non-positive effective alpha-sphere radius"
         )
+    # Smallest axis-aligned box enclosing every effective sphere. Uniform Monte
+    # Carlo samples are drawn from this box, whose volume is the scale factor.
     lower = np.min(centres - radii[:, None], axis=0)
     upper = np.max(centres + radii[:, None], axis=0)
     box_volume = float(np.prod(upper - lower))
@@ -128,7 +132,10 @@ def monte_carlo_union_volume(
         count = min(chunk_size, iterations - completed)
         points = rng.uniform(lower, upper, size=(count, 3))
         inside_any = np.zeros(count, dtype=bool)
-        # Sphere-wise evaluation avoids a potentially very large point-by-sphere array.
+        # Union-membership indicator:
+        #     I_k = 1 if ||p_k - c_i||² <= r_i² for at least one sphere i.
+        # `inside_any` stays Boolean, so overlapping spheres never double-count
+        # one sampled point. Sphere-wise evaluation also bounds memory use.
         for centre, r2 in zip(centres, radius_squared):
             active = ~inside_any
             if not np.any(active):
@@ -138,9 +145,13 @@ def monte_carlo_union_volume(
         points_inside += int(np.count_nonzero(inside_any))
         completed += count
 
+    # Monte Carlo union-volume estimator and binomial sampling error:
+    #     V_hat = V_box × N_inside / N
+    #     SE(V_hat) = V_box × sqrt[p_hat(1-p_hat) / N]
     fraction = points_inside / iterations
     volume = box_volume * fraction
     standard_error = box_volume * math.sqrt(fraction * (1.0 - fraction) / iterations)
+    # Diagnostic only: Σ(4πr_i³/3) overestimates volume when spheres overlap.
     naive_sum = float(np.sum((4.0 / 3.0) * math.pi * radii**3))
     return {
         "union_volume_A3": volume,
@@ -233,6 +244,8 @@ def calculate_pocket_volumes(
             }
         )
 
+    # This is one union over every selected pocket, not the arithmetic sum of
+    # per-pocket volumes; duplicate spheres and cross-pocket overlap count once.
     combined = unique_spheres(all_selected)
     combined_estimate = monte_carlo_union_volume(
         combined,

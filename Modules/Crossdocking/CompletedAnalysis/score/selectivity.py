@@ -47,6 +47,8 @@ def build_selectivity_table(
         own_score_column = f"{own_state}_r_i_docking_score"
         own_score = float(source[own_score_column])
         opposite_score = float(best_row["r_i_docking_score"])
+        # ΔS_sel = S_opposite - S_own. Glide scores improve as they become more
+        # negative, so a positive margin supports the original generation state.
         margin = opposite_score - own_score
 
         row = {
@@ -88,6 +90,7 @@ def build_selectivity_table(
             )
             row["own_state_ligand_efficiency"] = own_le
             row["opposite_state_ligand_efficiency"] = opposite_le
+            # Keep the same opposite-minus-own sign convention for efficiency.
             row["ligand_efficiency_margin"] = opposite_le - own_le
 
         rows.append(row)
@@ -105,6 +108,8 @@ def rank_selectivity(paired_table):
         "reverse_preferred_weak": 4,
         "reverse_selective": 5,
     }
+    # Rank by biological class, larger positive margin, then more-negative
+    # own-state docking score.
     ranked = paired_table.copy()
     ranked["class_priority"] = ranked["selectivity_class"].map(priority).fillna(99)
     ranked = ranked.sort_values(

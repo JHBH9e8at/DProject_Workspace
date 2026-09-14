@@ -25,15 +25,20 @@ def summarize_interactions(interactions_csv: str | Path, denominators: dict[str,
         residue_parts.append(chunk[["population_state", "molecule_id", "residue"]].drop_duplicates())
         typed_parts.append(chunk[["population_state", "molecule_id", "residue", "interaction_type"]].drop_duplicates())
     if not residue_parts: raise ValueError("Interaction table contains no rows")
+    # Count molecules, not raw ProLIF occurrences: one molecule contributes at
+    # most once to a residue and once to each residue/interaction-type pair.
     residue_unique = pd.concat(residue_parts, ignore_index=True).drop_duplicates()
     typed_unique = pd.concat(typed_parts, ignore_index=True).drop_duplicates()
     unknown = sorted(set(residue_unique.population_state) - set(denominators))
     if unknown: raise ValueError(f"Missing pose denominators for states: {unknown}")
     if any(value <= 0 for value in denominators.values()): raise ValueError("Pose denominators must be positive")
     residue = residue_unique.groupby(["residue", "population_state"])["molecule_id"].nunique().rename("poses").reset_index()
+    # P(residue | state) = unique molecules with residue / state denominator.
     residue["prevalence"] = residue.apply(lambda row: row.poses / denominators[row.population_state], axis=1)
     typed = typed_unique.groupby(["residue", "population_state", "interaction_type"])["molecule_id"].nunique().rename("poses").reset_index()
+    # Type-specific prevalence uses the same state denominator.
     typed["prevalence"] = typed.apply(lambda row: row.poses / denominators[row.population_state], axis=1)
+    # Dominant type = argmax_t P(residue, interaction type t | state).
     dominant = typed.loc[typed.groupby(["residue", "population_state"])["prevalence"].idxmax()].copy()
     dominant["dominant_type"] = dominant.interaction_type.map(ABBREVIATIONS).fillna(dominant.interaction_type)
     return residue, typed, dominant[["residue", "population_state", "dominant_type"]]

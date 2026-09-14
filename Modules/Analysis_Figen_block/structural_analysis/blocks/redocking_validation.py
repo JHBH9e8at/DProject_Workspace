@@ -63,12 +63,15 @@ def load_state_dataset(
         raise ValueError(f"{normalized_state}: docking scores contain nonfinite values")
     if not np.isfinite(rmsd_values.to_numpy(dtype=float)).all():
         raise ValueError(f"{normalized_state}: RMSD values contain nonfinite values")
+    # The source tables are paired by row position; both must describe the same
+    # pose sequence in the same order.
     return pd.DataFrame(
         {
             "state": normalized_state,
             "pose_index": np.arange(1, len(scores) + 1, dtype=int),
             "docking_score": scores.to_numpy(dtype=float),
             "rmsd": rmsd_values.to_numpy(dtype=float),
+            # Redocking-success indicator: I_i = 1 when RMSD_i < 2.0 Å.
             "within_2A": rmsd_values.to_numpy(dtype=float) < 2.0,
         },
         columns=POSE_COLUMNS,
@@ -105,6 +108,7 @@ def build_redocking_tables(
                 "rmsd_mean": float(data["rmsd"].mean()),
                 "rmsd_median": float(data["rmsd"].median()),
                 "rmsd_within_2A_count": int(data["within_2A"].sum()),
+                # Boolean mean = N(RMSD < 2 Å) / N(total poses).
                 "rmsd_within_2A_fraction": float(data["within_2A"].mean()),
             }
         )

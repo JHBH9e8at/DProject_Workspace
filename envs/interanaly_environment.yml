@@ -1,0 +1,13 @@
+name: interanaly
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - prolif
+  - git
+  - numpy
+  - pip
+  - pandas
+  - rdkit
+  - mdanalysis
+prefix: /home/andy/Project/conda_envs/interanaly

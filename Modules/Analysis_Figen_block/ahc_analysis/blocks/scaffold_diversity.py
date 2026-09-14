@@ -51,6 +51,7 @@ def pairwise_similarity(fingerprints) -> dict[str, float | int | None]:
         similarities.extend(current.tolist()); nearest[index] = current.max()
         nearest[:index] = np.maximum(nearest[:index], current)
     values = np.asarray(similarities)
+    # Fingerprint diversity: D_FP = 1 - mean[T(A_i, A_j)] for all pairs i < j.
     return {"pairs": len(values), "mean_similarity": float(values.mean()),
             "median_similarity": float(np.median(values)),
             "q95_similarity": float(np.quantile(values, .95)),
@@ -62,6 +63,7 @@ def pairwise_similarity(fingerprints) -> dict[str, float | int | None]:
 
 def scaffold_metrics(scaffolds) -> dict[str, float | int | None]:
     counts = Counter(scaffolds); total = sum(counts.values()); unique = len(counts)
+    # p_s = count(s)/N; H = -Σ p_s ln(p_s); H_norm = H/ln(unique scaffolds).
     probabilities = np.asarray(list(counts.values()), dtype=float) / total
     entropy = float(-(probabilities * np.log(probabilities)).sum())
     ordered = sorted(counts.values(), reverse=True)
@@ -102,6 +104,8 @@ def analyze_source(frame: pd.DataFrame, source: str, *, last_n: int = 50,
                    "fraction_nearest_below_0_4": None, "fraction_nearest_below_0_6": None}
         if not previous.empty:
             refs = _sample(previous, novelty_reference_size, rng)["fp"].tolist()
+            # Novelty proxy for molecule i: max_j T(fp_i, prior_fp_j).
+            # Lower nearest-prior similarity means greater fingerprint novelty.
             nearest = np.asarray([max(DataStructs.BulkTanimotoSimilarity(fp, refs)) for fp in current["fp"]])
             novelty = {"mean_nearest_similarity_to_prior": float(nearest.mean()),
                        "median_nearest_similarity_to_prior": float(np.median(nearest)),

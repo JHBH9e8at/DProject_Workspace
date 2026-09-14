@@ -89,9 +89,13 @@ def filter_population(
         steps.append((name, len(working), len(filtered)))
         return filtered
 
+    # Filter 1 — remove molecules rejected by the upstream AHC validity check.
     working = apply_filter("valid molecule", table, _true_mask(table["valid"]))
+    # Filter 2 — retain instances marked unique by the upstream generator.
     working = apply_filter("unique molecule", working, _true_mask(working["unique"]))
 
+    # Filter 3 — canonical SMILES defines molecular identity for all subsequent
+    # duplicate removal; unparsable structures cannot be cross-docked safely.
     canonicalized = working["smiles"].apply(canonicalize_smiles)
     working["canon_smiles"] = canonicalized.apply(lambda result: result[0])
     working["_mol"] = canonicalized.apply(lambda result: result[1])
@@ -110,6 +114,8 @@ def filter_population(
     finite_score = working[score_col].map(
         lambda value: pd.notna(value) and math.isfinite(value)
     )
+    # Filter 4 — zero is an AHC docking-failure placeholder, not a physical
+    # Glide score. A usable variant ID is also required to locate the pose.
     usable_result = finite_score & working[score_col].ne(0)
     working = apply_filter(
         "usable docking result",
@@ -120,11 +126,14 @@ def filter_population(
     if working.empty:
         raise ValueError("No molecules remain after filtering")
 
+    # Filter 5 — one canonical molecule contributes once. Because more-negative
+    # Glide scores are more favourable, idxmin retains its best own-state pose.
     before_duplicates = len(working)
     best_indices = working.groupby("canon_smiles")[score_col].idxmin()
     working = working.loc[best_indices].copy()
     steps.append(("canonical duplicate removal", before_duplicates, len(working)))
 
+    # Rank from most to least favourable own-state docking score.
     working = working.sort_values(score_col, ascending=True).reset_index(drop=True)
     working.insert(0, "crossdock_selection_rank", range(1, len(working) + 1))
     before_selection = len(working)
@@ -133,6 +142,8 @@ def filter_population(
         selection_name = f"test-mode top-{testmode_top_n} override"
         selection_mode = "testmode_top_n"
     else:
+        # Production percentile selection:
+        #     N_selected = ceil(N_usable × percentage / 100)
         selection_count = max(
             1,
             math.ceil(before_selection * best_dscore_top_per / 100.0),
@@ -142,6 +153,8 @@ def filter_population(
     working = working.head(selection_count).copy()
     steps.append((selection_name, before_selection, len(working)))
 
+    # PAINS/BRENK are warning annotations only; matches remain in the selected
+    # population for downstream review.
     working = annotate_structural_alerts(working)
     working = working.drop(columns=["_mol"])
 
