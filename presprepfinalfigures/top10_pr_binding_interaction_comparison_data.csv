@@ -1,0 +1,28 @@
+group,feature,count,n,prevalence_percent
+PR-native best 10,ALA91,8,10,80.0
+PR-native best 10,THR94,7,10,70.0
+PR-native best 10,SER118,9,10,90.0
+PR-native best 10,GLU497,1,10,10.0
+PR-native best 10,PRO710,7,10,70.0
+PR-native best 10,ASN711,7,10,70.0
+PR-native best 10,ARG712,8,10,80.0
+PR-native best 10,ASN711 + ARG712,6,10,60.0
+PR-native best 10,GLU497 + SER118,1,10,10.0
+PPS-derived best PR 10,ALA91,2,10,20.0
+PPS-derived best PR 10,THR94,8,10,80.0
+PPS-derived best PR 10,SER118,6,10,60.0
+PPS-derived best PR 10,GLU497,7,10,70.0
+PPS-derived best PR 10,PRO710,1,10,10.0
+PPS-derived best PR 10,ASN711,3,10,30.0
+PPS-derived best PR 10,ARG712,4,10,40.0
+PPS-derived best PR 10,ASN711 + ARG712,3,10,30.0
+PPS-derived best PR 10,GLU497 + SER118,6,10,60.0
+PPS-derived weakest PR 10,ALA91,0,10,0.0
+PPS-derived weakest PR 10,THR94,3,10,30.0
+PPS-derived weakest PR 10,SER118,0,10,0.0
+PPS-derived weakest PR 10,GLU497,3,10,30.0
+PPS-derived weakest PR 10,PRO710,1,10,10.0
+PPS-derived weakest PR 10,ASN711,0,10,0.0
+PPS-derived weakest PR 10,ARG712,2,10,20.0
+PPS-derived weakest PR 10,ASN711 + ARG712,0,10,0.0
+PPS-derived weakest PR 10,GLU497 + SER118,0,10,0.0

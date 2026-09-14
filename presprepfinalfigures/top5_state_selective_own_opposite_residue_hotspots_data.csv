@@ -1,0 +1,25 @@
+residue,own_PPS,own_PR,opposite_PPS,opposite_PR,dominant_own_PPS,dominant_own_PR,reference_PPS,reference_PR,member_PPS P2,member_PPS P38,member_PPS P51,member_PR P11,member_PR P15,member_PR P60
+LYS83,0.0,0.0,0.4,0.0,-,-,-,-,False,False,False,False,False,True
+ASP89,0.2,0.4,0.2,0.4,HBD,HBD,-,-,True,False,False,False,False,True
+ALA91,0.0,0.8,0.0,0.0,-,HBD,-,HBD,False,False,False,True,True,True
+THR94,0.0,0.2,0.4,0.0,-,HBD,-,-,False,False,False,False,False,True
+SER118,0.0,1.0,0.0,0.0,-,HBA,-,-,False,True,False,True,False,False
+LYS146,0.0,0.0,0.0,0.4,-,-,-,-,True,False,False,False,False,True
+ARG147,0.0,0.0,0.2,0.0,-,-,-,-,True,True,False,False,False,True
+TYR164,0.6,0.0,0.0,0.2,HBA,-,-,-,True,True,False,False,False,True
+THR167,0.0,0.0,0.0,0.2,-,-,-,-,True,False,True,False,False,False
+ASP168,1.0,0.0,0.0,0.4,HBD,-,HBD,-,True,True,False,False,False,False
+GLU170,0.2,0.0,0.0,0.2,HBD,-,-,-,False,True,False,False,False,False
+LEU496,0.0,0.0,0.2,0.0,-,-,-,-,False,False,False,True,False,False
+GLU497,0.0,0.0,0.4,0.0,-,-,-,-,False,True,False,True,False,False
+HIS666,0.8,0.0,0.0,0.2,pi,-,pi,-,False,True,False,False,False,False
+PHE669,0.2,0.0,0.0,0.2,HBA,-,-,-,False,True,False,False,False,False
+PRO710,0.0,0.4,0.2,0.0,-,HBD,-,-,False,True,False,True,True,True
+ASN711,1.0,0.6,0.0,0.2,HBA,HBA,HBA,HBA,True,True,False,False,True,True
+ARG712,1.0,0.6,0.2,0.4,HBA,HBA,HBA/pi-cat,HBA/pi-cat,True,True,False,True,False,True
+ASP717,0.0,0.4,0.2,0.0,-,HBD,-,-,False,False,True,False,False,True
+TYR722,0.0,0.8,0.4,0.0,-,HBA,-,-,True,False,False,False,False,True
+LYS762,0.0,0.0,0.0,0.4,-,-,-,-,False,True,False,False,False,True
+GLY768,0.8,0.0,0.0,0.0,HBA,-,-,-,True,False,False,False,False,False
+GLY771,0.2,0.0,0.0,0.0,HBA,-,-,-,True,False,False,False,False,False
+GLU774,0.0,0.0,0.0,0.2,-,-,-,-,True,False,False,False,False,True
