@@ -1,0 +1,30 @@
+# Run: python run_analysis.py --config analysis.in
+
+# Required
+pr_input=..\..\..\..\Resultsbin\AHC_results\PR\PR_scores.csv
+pps_input=..\..\..\..\Resultsbin\AHC_results\PPS\PPS_scores.csv
+results_root=..\..\..\..\work_results
+run_id=PR_PPS_completed
+
+# Blocks: on/off
+physchem=on
+last_window=on
+scaffold=off
+chemical_space=off
+
+# Common options
+reference=..\..\..\AHC_Related\ref_structures\ref_desc.csv
+last_n=50
+# resume: on/off (default off)
+resume=off
+
+# Chemical-space options
+# usecache: on/off (default on)
+usecache=on
+methods=umap,tsne
+features=fp,all_desc,select_desc
+random_state=42
+
+# Allowed: methods=umap,tsne | features=fp,all_desc,select_desc
+# scaffold=on prepares/reuses its required UMAP/fp membership automatically.
+# See analysis.md for detailed behavior and defaults.

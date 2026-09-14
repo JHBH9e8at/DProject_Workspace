@@ -1,0 +1,99 @@
+{
+  "method": "bounding-box Monte Carlo union of selected Fpocket alpha spheres",
+  "selection_rule": "alpha-sphere centre within threshold of any ligand heavy atom",
+  "fpocket_dir": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PPS_Protein_out",
+  "ligand": "Q:\\coding_dir\\701_Project\\workspace\\AHC_Related\\ref_structures\\Structures\\MYH7_PPS_OM.pdb",
+  "ligand_resname": "2OW",
+  "ligand_heavy_atoms": 29,
+  "targets": [
+    2,
+    38,
+    51
+  ],
+  "distance_threshold_A": 3.0,
+  "iterations": 1000000,
+  "seed": 42,
+  "alpha_sphere_radius_offset_A": -1.6,
+  "results": [
+    {
+      "scope": "pocket2",
+      "pocket_file": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PPS_Protein_out\\pockets\\pocket2_vert.pqr",
+      "total_alpha_spheres": 149,
+      "selected_alpha_spheres": 109,
+      "union_volume_A3": 530.0273381097315,
+      "standard_error_A3": 0.7376527185472164,
+      "bounding_box_volume_A3": 1556.6376543260005,
+      "points_inside": 340495,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 6799.061461604731,
+      "bounding_box_min": [
+        42.254000000000005,
+        101.31299999999999,
+        54.964
+      ],
+      "bounding_box_max": [
+        51.36,
+        113.854,
+        68.595
+      ]
+    },
+    {
+      "scope": "pocket38",
+      "pocket_file": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PPS_Protein_out\\pockets\\pocket38_vert.pqr",
+      "total_alpha_spheres": 137,
+      "selected_alpha_spheres": 52,
+      "union_volume_A3": 370.2258904978553,
+      "standard_error_A3": 0.5039634019817342,
+      "bounding_box_volume_A3": 1056.2370989400004,
+      "points_inside": 350514,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 3035.2145522392675,
+      "bounding_box_min": [
+        47.632000000000005,
+        99.483,
+        64.698
+      ],
+      "bounding_box_max": [
+        58.218,
+        110.028,
+        74.16
+      ]
+    },
+    {
+      "scope": "pocket51",
+      "pocket_file": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PPS_Protein_out\\pockets\\pocket51_vert.pqr",
+      "total_alpha_spheres": 25,
+      "selected_alpha_spheres": 0,
+      "union_volume_A3": 0.0,
+      "standard_error_A3": 0.0,
+      "bounding_box_volume_A3": 0.0,
+      "points_inside": 0,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 0.0,
+      "bounding_box_min": [],
+      "bounding_box_max": []
+    },
+    {
+      "scope": "combined",
+      "pocket_file": "pocket2;pocket38;pocket51",
+      "total_alpha_spheres": "",
+      "selected_alpha_spheres": 161,
+      "union_volume_A3": 896.7835004591833,
+      "standard_error_A3": 1.7734549351236624,
+      "bounding_box_volume_A3": 4403.920290223998,
+      "points_inside": 203633,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 9834.276013843999,
+      "bounding_box_min": [
+        42.254000000000005,
+        99.483,
+        54.964
+      ],
+      "bounding_box_max": [
+        58.218,
+        113.854,
+        74.16
+      ]
+    }
+  ]
+}

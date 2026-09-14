@@ -1,0 +1,18 @@
+"""Multiprocessing interaction-analysis adapter."""
+
+from .common.batch_core import (
+    _collect_population_outputs, _job_is_complete, _materialize_population_sdf,
+    build_population_manifest, run_batch_interactions as _run_batch_interactions,
+    select_population,
+)
+
+
+def run_batch_interactions(*args, **kwargs):
+    kwargs["_enable_mp"] = True
+    return _run_batch_interactions(*args, **kwargs)
+
+
+__all__ = [
+    "select_population", "build_population_manifest", "run_batch_interactions",
+    "_collect_population_outputs", "_job_is_complete", "_materialize_population_sdf",
+]

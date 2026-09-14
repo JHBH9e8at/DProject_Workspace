@@ -1,0 +1,18 @@
+# Run: python run_analysis.py --config analysis.in
+
+results_root=..\..\..\work_results
+run_id=PR_PPS_analysis
+dry_run=ON
+
+# Modules execute in the fixed order shown below
+ahc_analysis=ON
+ahc_config=ahc_analysis\ahc_analysis.in
+
+structural_analysis=OFF
+structural_config=structural_analysis\structural_analysis.in
+
+interaction_result_analysis=OFF
+interaction_result_config=interaction_result_analysis\interaction_result_analysis.in
+
+figures=OFF
+figures_config=figures\figures.in

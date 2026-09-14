@@ -1,0 +1,107 @@
+{
+  "method": "bounding-box Monte Carlo union of selected Fpocket alpha spheres",
+  "selection_rule": "all alpha spheres in each target pocket",
+  "fpocket_dir": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PR_potein_out",
+  "ligand": "Q:\\coding_dir\\701_Project\\workspace\\AHC_Related\\ref_structures\\Structures\\MYH7_PR_OM.pdb",
+  "ligand_resname": "2OW",
+  "ligand_heavy_atoms": 29,
+  "targets": [
+    11,
+    15,
+    60
+  ],
+  "distance_threshold_A": null,
+  "iterations": 1000000,
+  "seed": 42,
+  "alpha_sphere_radius_offset_A": -1.6,
+  "results": [
+    {
+      "scope": "pocket11",
+      "pocket_file": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PR_potein_out\\pockets\\pocket11_vert.pqr",
+      "total_alpha_spheres": 64,
+      "selected_alpha_spheres": 64,
+      "union_volume_A3": 575.4152389469148,
+      "standard_error_A3": 0.8486403969261486,
+      "bounding_box_volume_A3": 1827.0166470240001,
+      "points_inside": 314948,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 4064.4993871987876,
+      "bounding_box_min": [
+        45.926,
+        84.928,
+        36.93
+      ],
+      "bounding_box_max": [
+        61.050000000000004,
+        95.74,
+        48.103
+      ]
+    },
+    {
+      "scope": "pocket15",
+      "pocket_file": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PR_potein_out\\pockets\\pocket15_vert.pqr",
+      "total_alpha_spheres": 17,
+      "selected_alpha_spheres": 17,
+      "union_volume_A3": 131.8329468578304,
+      "standard_error_A3": 0.19304142932388146,
+      "bounding_box_volume_A3": 414.5012352,
+      "points_inside": 318052,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 541.4421045256339,
+      "bounding_box_min": [
+        52.347,
+        82.51100000000001,
+        32.789
+      ],
+      "bounding_box_max": [
+        60.609,
+        90.311,
+        39.221000000000004
+      ]
+    },
+    {
+      "scope": "pocket60",
+      "pocket_file": "Q:\\coding_dir\\701_Project\\Resultsbin\\fpocket_res\\PR_potein_out\\pockets\\pocket60_vert.pqr",
+      "total_alpha_spheres": 146,
+      "selected_alpha_spheres": 146,
+      "union_volume_A3": 1916.2352484916507,
+      "standard_error_A3": 3.7731334553060565,
+      "bounding_box_volume_A3": 9345.665472549994,
+      "points_inside": 205040,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 9854.044996649118,
+      "bounding_box_min": [
+        42.923,
+        86.85700000000001,
+        18.405
+      ],
+      "bounding_box_max": [
+        58.933,
+        106.26,
+        48.49
+      ]
+    },
+    {
+      "scope": "combined",
+      "pocket_file": "pocket11;pocket15;pocket60",
+      "total_alpha_spheres": "",
+      "selected_alpha_spheres": 227,
+      "union_volume_A3": 2569.2350569694495,
+      "standard_error_A3": 5.1647431333113865,
+      "bounding_box_volume_A3": 12951.536030455,
+      "points_inside": 198373,
+      "iterations": 1000000,
+      "naive_sphere_volume_sum_A3": 14459.986488373539,
+      "bounding_box_min": [
+        42.923,
+        82.51100000000001,
+        18.405
+      ],
+      "bounding_box_max": [
+        61.050000000000004,
+        106.26,
+        48.49
+      ]
+    }
+  ]
+}

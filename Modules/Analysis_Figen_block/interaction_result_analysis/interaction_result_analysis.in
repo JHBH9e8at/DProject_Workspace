@@ -1,0 +1,30 @@
+# Run: python run_interaction_result_analysis.py --config interaction_result_analysis.in
+
+results_root=..\..\..\..\work_results
+run_id=PR_PPS_interaction_results
+resume=OFF
+
+# Enable at least one result-only block
+residue_hotspot=ON
+full_last=OFF
+top_candidates=OFF
+own_opposite=OFF
+
+# Shared full interaction table and NAME=count mappings
+interactions_csv=path\to\interactions.csv
+denominators=PPS=200,PR=200
+
+# Full versus last-window inputs
+metadata_csv=path\to\pose_metadata.csv
+total_poses=PPS=200,PR=200
+last_start=PPS=151,PR=151
+
+# Top-candidate inputs
+summary_csv=path\to\top5_candidate_summary.csv
+transitions_csv=path\to\top5_interaction_transitions.csv
+
+# Own/opposite matched-pose inputs
+own_metadata=path\to\own_pose_metadata.csv
+own_interactions=path\to\own_interactions.csv
+opposite_metadata=path\to\opposite_pose_metadata.csv
+opposite_interactions=path\to\opposite_interactions.csv

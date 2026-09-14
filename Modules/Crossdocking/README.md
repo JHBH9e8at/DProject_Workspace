@@ -1,5 +1,12 @@
 #### info! 
 If you wish to see the –help for running please jump down to the **Software architecture** section below ! 
+
+> Current entry points: use `run_crossdocking.py --config crossdocking.in` for
+> the sequential Glide calculation and
+> `CompletedAnalysis/crossdocking_analysis.py --config crossdocking.in` after
+> calculation. `multiprocessing` applies only to completed PoseCheck/ProLIF
+> interaction analysis. Glide cross-docking is intentionally sequential to
+> avoid licence-slot exhaustion and unstable concurrent external jobs.
 # Cross-Docking Workflow
 This package evaluates whether molecules generated and optimized against the two receptor states under the same AHC protocol may exhibit selectivity for a specific state
 ## Biological question
@@ -140,7 +147,7 @@ managed or removed separately.
 
 ## End-to-end execution flow
 
-`crossdocking_runner.py` is the top-level runner. It accepts one flat
+`crossdocking_runner.py` is the calculation-only top-level runner. It accepts one flat
 `key=value` configuration file and performs:
 
 ```text
@@ -156,17 +163,14 @@ two-arm cross-docking
         └── PR ligands  -> PPS grid
         │
         ▼
-double-arm QC and score reconciliation
+hashed `crossdocking_calculation_manifest.json`
         │
-        ▼
-paired selectivity ranking
-        │
-        └── optional raw-population overlap
+        └── consumed by Analysis_Figen_block for QC/selectivity/overlap
 ```
 
-The interaction-analysis block is intentionally separate from this flow.
+Score and interaction analysis are intentionally separate from the calculation runner.
 
-## Running the full workflow
+## Running the calculation workflow
 
 Run from the repository root so that package imports resolve consistently:
 

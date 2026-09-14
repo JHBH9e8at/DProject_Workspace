@@ -1,0 +1,5 @@
+scope,pocket_file,total_alpha_spheres,selected_alpha_spheres,union_volume_A3,standard_error_A3,naive_sphere_volume_sum_A3,bounding_box_volume_A3,points_inside,iterations,bounding_box_min,bounding_box_max
+pocket2,Q:\coding_dir\701_Project\Resultsbin\fpocket_res\PPS_Protein_out\pockets\pocket2_vert.pqr,149,149,961.1711044148066,1.8046415695230562,10263.379406256809,4349.466049499998,220986,1000000,"[37.51, 97.123, 49.825]","[51.36, 113.854, 68.595]"
+pocket38,Q:\coding_dir\701_Project\Resultsbin\fpocket_res\PPS_Protein_out\pockets\pocket38_vert.pqr,137,137,929.2475074218195,1.8987126669816405,6560.426343343044,4808.848757855998,193237,1000000,"[46.921, 94.055, 55.478]","[58.218, 114.051, 76.76599999999999]"
+pocket51,Q:\coding_dir\701_Project\Resultsbin\fpocket_res\PPS_Protein_out\pockets\pocket51_vert.pqr,25,25,221.91125277221954,0.23506665879892477,1686.6389912355555,470.913200121,471236,1000000,"[42.755, 114.923, 61.132000000000005]","[50.226000000000006, 122.97, 68.965]"
+combined,pocket2;pocket38;pocket51,,311,2097.870820897525,5.425934528441446,18510.44474083541,16131.511602619994,130048,1000000,"[37.51, 94.055, 49.825]","[58.218, 122.97, 76.76599999999999]"

@@ -1,0 +1,21 @@
+# PRdir/PPSdir may be either a directory or the full CSV path.
+# When a directory is supplied, PR_scores.csv/PPS_scores.csv is selected.
+PRdir=Q:\coding_dir\701_Project\Resultsbin\AHC_results\PR\PR_scores.csv
+PPSdir=Q:\coding_dir\701_Project\Resultsbin\AHC_results\PPS\PPS_scores.csv
+outdir=Q:\coding_dir\701_Project\Writeup_Figures\newemb
+ref_desc=Q:\coding_dir\701_Project\workspace\AHC_Related\ref_structures\ref_desc.csv
+
+last_n=50
+threshold=-6
+
+# Optional per-dataset overrides:
+PR_threshold=-6
+PPS_threshold=-9
+
+# Joint chemical-space embedding settings
+umap_mode=on
+tsne_mode=on
+descriptormode=both
+featuremode=both
+cache_mode=use
+random_state=42

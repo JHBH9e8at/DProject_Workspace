@@ -1,0 +1,27 @@
+# Run: python run_ahc_analysis.py --config ahc_analysis.in
+
+# Required paths and shared run identifier
+pr_input=..\..\..\..\Resultsbin\AHC_results\PR\PR_scores.csv
+pps_input=..\..\..\..\Resultsbin\AHC_results\PPS\PPS_scores.csv
+results_root=..\..\..\..\work_results
+run_id=PR_PPS_completed
+
+# Analysis blocks: ON/OFF
+physchem=ON
+last_window=ON
+scaffold=OFF
+chemical_space=OFF
+
+# Common options
+reference=..\..\..\AHC_Related\ref_structures\ref_desc.csv
+last_n=50
+resume=OFF
+
+# Chemical-space options
+usecache=ON
+methods=umap,tsne
+features=fp,all_desc,select_desc
+random_state=42
+
+# scaffold=ON obtains its UMAP/fingerprint membership automatically.
+# See README.md for cache and option override rules.

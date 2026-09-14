@@ -1,0 +1,35 @@
+# Original own-state MP interaction analysis.
+own_result_dir=Q:\coding_dir\701_Project\Resultsbin\MP_Interrun
+
+# Best-pose cross-docked interaction analysis.
+opposite_result_dir=Q:\coding_dir\701_Project\Resultsbin\CD_counterpart_inter
+
+# Top-5 state-selective candidate analysis used by the dedicated top-5 figure.
+top5_input_dir=Q:\coding_dir\701_Project\Resultsbin\CD_counterpart_inter\analysis\top5_state_selective
+
+output_dir=Q:\coding_dir\701_Project\Writeup_Figures\crossdock_interaction
+
+# Residue selection uses the union of prevalence, per-condition top-N,
+# absolute-change top-N, and available reference residues.
+min_prevalence=0.10
+top_n_per_condition=12
+top_n_delta=12
+
+PPS_color=#D9534F
+PR_color=#2878B5
+opposite_color=#9A9A9A
+dpi=300
+
+# Fpocket assignments shown beside the central residue labels.
+show_fpocket=on
+fpocket_root=Q:\coding_dir\701_Project\Resultsbin\fpocket_res
+
+# Width of the central residue column and spacing between prevalence panels.
+# Increase residue_gap_ratio to separate the left and right prevalence panels.
+residue_gap_ratio=0.42
+prevalence_panel_wspace=0.02
+
+# Panel-header position and the gap above the complete figure.
+panel_header_y=1.0
+# Increase this value to move the main title farther away from the figure.
+main_title_y=1.04

@@ -1,0 +1,36 @@
+# Cross-docking calculation
+pps_input=path/to/PPS_scores.csv
+pps_run_dir=path/to/PPS_AHC_run
+pr_input=path/to/PR_scores.csv
+pr_run_dir=path/to/PR_AHC_run
+pps_grid=path/to/PPS_grid.zip
+pr_grid=path/to/PR_grid.zip
+output_dir=path/to/work_results/crossdocking/run_id
+results_root=path/to/work_results
+run_id=run_id
+
+# Selection and docking
+best_dscore_top_per=1
+testmode_top_n=
+precision=SP
+ligand_prep_mode=off
+allow_unavailable=off
+resume=off
+fail_fast=on
+
+# Completed analysis
+score_analysis=on
+interaction_analysis=off
+pps_receptor=path/to/PPS_receptor.pdb
+pr_receptor=path/to/PR_receptor.pdb
+interaction_mode=both
+include_secondary_interactions=off
+selectivity_threshold=2.0
+strong_score_threshold=-8.0
+
+# Multiprocessing applies only to completed interaction analysis.
+# Glide cross-docking itself always runs sequentially.
+multiprocessing=off
+posecheck_workers=30
+posecheck_chunk_size=auto
+prolif_workers=30

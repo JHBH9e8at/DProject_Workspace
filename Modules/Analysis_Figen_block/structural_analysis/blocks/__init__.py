@@ -1,0 +1,1 @@
+"""Internal structural analysis implementations."""

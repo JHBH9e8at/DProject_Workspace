@@ -1,0 +1,19 @@
+# Cross-docked best-pose interaction analysis on the server.
+crossdocking_dir=/home/andy/proj/Results/CDRes_LP_On/crossdocking
+
+pps_receptor=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PPS_Protein_no_conect.pdb
+pr_receptor=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/Structures/PR_Protein_no_conect.pdb
+
+output_dir=/home/andy/proj/Results/CD_counterpart_inter
+
+# Blank selects the complete population; use 5 for a smoke test.
+testmode_top_n=5
+analysis=both
+
+posecheck_workers=30
+posecheck_chunk_size=auto
+prolif_workers=30
+
+include_secondary_interactions=off
+resume=on
+fail_fast=on
