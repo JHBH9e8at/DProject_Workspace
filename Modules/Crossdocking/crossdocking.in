@@ -5,15 +5,15 @@ pr_input=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PRrun/scores.csv
 pr_run_dir=/home/andy/proj/work_results/AHC_Resultsbin/SMILES-RNN_PRrun
 pps_grid=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PPS/PPSgrid.zip
 pr_grid=/home/andy/proj/DProject_Workspace/AHC_Related/ref_structures/grids/PR/PR_Auto_Grid.zip
-output_dir=/home/andy/proj/work_results/crossdocking/PR_PPS_crossdocking
+output_dir=/home/andy/proj/work_results/crossdocking
 results_root=/home/andy/proj/work_results
-run_id=PR_PPS_crossdocking
+run_id=CDres_LP_ON
 
 # Selection and docking
 best_dscore_top_per=1
 testmode_top_n=
 precision=SP
-ligand_prep_mode=off
+ligand_prep_mode=on
 allow_unavailable=off
 resume=off
 fail_fast=on

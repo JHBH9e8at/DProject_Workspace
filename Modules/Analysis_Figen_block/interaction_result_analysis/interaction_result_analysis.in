@@ -11,13 +11,13 @@ top_candidates=OFF
 own_opposite=OFF
 
 # Shared full interaction table and NAME=count mappings
-interactions_csv=/home/andy/proj/work_results/analysis/crossdocking_interactions/PR_PPS_crossdocking/aggregate/interactions_long.csv
-denominators=PPS=205,PR=171
+interactions_csv=/home/andy/proj/work_results/analysis/crossdocking_interactions/CDres_LP_ON/aggregate/interactions_long.csv
+denominators=PPS=205,PR=197
 
 # Full versus last-window inputs
-metadata_csv=/home/andy/proj/work_results/analysis/crossdocking_interactions/PR_PPS_crossdocking/aggregate/pose_metadata.csv
-total_poses=PPS=205,PR=171
-last_start=PPS=156,PR=122
+metadata_csv=/home/andy/proj/work_results/analysis/crossdocking_interactions/CDres_LP_ON/aggregate/pose_metadata.csv
+total_poses=PPS=205,PR=197
+last_start=PPS=156,PR=148
 
 # Top-candidate inputs
 summary_csv=

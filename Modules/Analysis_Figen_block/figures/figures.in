@@ -42,20 +42,20 @@ full_csv=
 last_csv=
 typed_csv=/home/andy/proj/work_results/analysis/residue_hotspot/PR_PPS_analysis_residue_hotspot/tables/interaction_type_prevalence.csv
 pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
-reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/PR_PPS_crossdocking/reference_interactions.csv
-denominators=PPS=200,PR=200
+reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/CDres_LP_ON/reference_interactions.csv
+denominators=PPS=205,PR=197
 
 # Top-candidate hotspot figure
 top_own_csv=
 top_opposite_csv=
 top_typed_csv=
 top_pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
-top_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/PR_PPS_crossdocking/reference_interactions.csv
+top_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/CDres_LP_ON/reference_interactions.csv
 top_denominators=PPS=5,PR=5
 
 # Own/opposite hotspot figure
 ownopp_prevalence_csv=
 ownopp_typed_csv=
 ownopp_pocket_files=PPS P2=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket2_atm.pdb,PPS P38=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket38_atm.pdb,PPS P51=/home/andy/proj/work_results/fpocket_res/PPS_Protein_out/pockets/pocket51_atm.pdb,PR P11=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket11_atm.pdb,PR P15=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket15_atm.pdb,PR P60=/home/andy/proj/work_results/fpocket_res/PR_potein_out/pockets/pocket60_atm.pdb
-ownopp_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/PR_PPS_crossdocking/reference_interactions.csv
+ownopp_reference_csv=/home/andy/proj/work_results/analysis/reference_interactions/CDres_LP_ON/reference_interactions.csv
 ownopp_denominators=PPS=5,PR=5
