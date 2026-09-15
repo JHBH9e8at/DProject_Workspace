@@ -50,7 +50,8 @@ if __name__ == "__main__":
     parser.add_argument("--run-dir", required=True, help="AHC result directory")
     parser.add_argument("--run-name", required=True, help="Run prefix, e.g. PPS or PR")
     parser.add_argument("--output", required=True, help="Output manifest CSV")
-    parser.add_argument("--cluster", default="tcp://138.37.52.153:8786")
+    # default cluster has been removed upon request
+    parser.add_argument("--cluster", default="")
     parser.add_argument("--step-col", default="step")
     parser.add_argument("--variant-col", default=None)
     parser.add_argument("--limit", type=int, default=None)
@@ -77,4 +78,4 @@ if __name__ == "__main__":
 #   --run-dir /home/andy/proj/701/output/2026_06_02_SMILES-RNN_PPS_tester_run_2 \
 #   --run-name PPS \
 #   --output /path/to/PPS_to_PR_manifest.csv \
-#   --cluster tcp://138.37.52.153:8786          #<- sure to check 
+#   --cluster "${DASK_SCHEDULER_ADDRESS}"          #<- sure to check 

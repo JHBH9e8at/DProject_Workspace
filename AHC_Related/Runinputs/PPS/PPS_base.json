@@ -32,7 +32,7 @@
         "parameters": {
           "prefix": "PPS",
           "glide_template": "/home/andy/proj/DProject_Workspace/AHC_Related/Runinputs/PPS/PPSGlide.in",
-          "cluster": "tcp://138.37.52.153:8786",
+          "cluster": "",
           "timeout": 600.0,
           "ligand_preparation": "ligprep"
         }
